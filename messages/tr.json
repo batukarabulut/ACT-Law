@@ -1,0 +1,263 @@
+{
+  "nav": {
+    "lawFirm": "Hukuk Bürosu",
+    "home": "Anasayfa",
+    "about": "Hakkımızda",
+    "practiceAreas": "Çalışma Alanları",
+    "blog": "Blog",
+    "faq": "S.S.S",
+    "contact": "İletişim",
+    "bookAppointment": "Randevu Al",
+    "menuAria": "Menü"
+  },
+  "footer": {
+    "lawFirm": "Hukuk Bürosu",
+    "services": "Hizmetlerimiz",
+    "pages": "Sayfalar",
+    "legal": "Yasal",
+    "contact": "İletişim",
+    "allRights": "Tüm hakları saklıdır.",
+    "disclaimer": "Bu site bilgilendirme amaçlıdır.",
+    "allServices": "Tüm Hizmetler →",
+    "about": "Hakkımızda",
+    "servicesLink": "Hizmetlerimiz",
+    "blog": "Blog",
+    "faq": "S.S.S",
+    "terms": "Kullanım Koşulları",
+    "cookie": "Çerez Politikası",
+    "aydinlatma": "Aydınlatma Metni",
+    "ticaretHukuku": "Ticaret Hukuku",
+    "sirketlerHukuku": "Şirketler Hukuku",
+    "aileHukuku": "Aile Hukuku",
+    "mirasHukuku": "Miras Hukuku",
+    "isHukuku": "İş Hukuku"
+  },
+  "hero": {
+    "badge": "Profesyonel Hukuk Danışmanlığı",
+    "title1": "Hukuki Çözümleriniz İçin",
+    "title2": "Güvenilir Partner",
+    "desc": "Ticaret, şirketler, aile, miras ve iş hukuku alanlarında 10+ yıllık deneyim ile stratejik ve sonuç odaklı hukuki danışmanlık hizmeti sunuyoruz.",
+    "ctaFree": "Ücretsiz Danışmanlık",
+    "ctaServices": "Hizmetlerimizi İncele",
+    "stat1": "Yıllık Deneyim",
+    "stat2": "Başarılı Dava",
+    "stat3": "Uzmanlık Alanı",
+    "stat4": "Müvekkil Memnuniyeti",
+    "phoneLabel": "7/24 Bizi Arayın"
+  },
+  "home": {
+    "practiceAreaLabel": "Çalışma Alanları",
+    "seeAll": "Tüm Hizmetleri Gör",
+    "aboutLabel": "Hakkımızda",
+    "moreInfo": "Daha Fazla Bilgi",
+    "yearsExp": "Yıllık Deneyim",
+    "blogLabel": "Blog",
+    "latestPosts": "Son Yazılar",
+    "seeAllPosts": "Tümünü Gör",
+    "allPosts": "Tüm Yazılar",
+    "detail": "Detay",
+    "ctaTitle": "Hukuki Danışmanlık İçin",
+    "ctaTitleHighlight": "Bize Ulaşın",
+    "ctaDesc": "İlk görüşmemiz ücretsizdir. Hukuki sorunlarınızı dinler, size en uygun çözüm yolunu belirleriz.",
+    "ctaContact": "İletişime Geç",
+    "ctaCall": "Bizi Arayın"
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "contact": "İletişim",
+    "bookAppointment": "Randevu Al",
+    "education": "Eğitim",
+    "certifications": "Sertifikalar",
+    "values": "Değerlerimiz",
+    "ctaTitle": "Danışmanlık İçin",
+    "ctaTitleHighlight": "Bize Ulaşın",
+    "ctaDesc": "İlk görüşme ücretsizdir.",
+    "ctaContact": "İletişime Geç"
+  },
+  "contact": {
+    "title": "İletişim",
+    "reachUs": "Bize Ulaşın",
+    "firstFree": "İlk görüşmemiz ücretsizdir.",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "address": "Adres",
+    "hours": "Çalışma Saatleri",
+    "emergency": "Acil Durum?",
+    "emergencyDesc": "Gözaltı veya tutuklama için 7/24 ulaşılabilir.",
+    "callNow": "Hemen Ara",
+    "formTitle": "İletişim Formu",
+    "formDesc": "En kısa sürede dönüş yapacağız.",
+    "location": "Konum",
+    "locationTitle": "Eskişehir Adalet Sarayı",
+    "locationSub": "Büromuzun bulunduğu adliye binası",
+    "openInMaps": "Konumu Google Maps'te aç"
+  },
+  "contactForm": {
+    "name": "Ad Soyad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "subject": "Konu",
+    "message": "Mesajınız",
+    "select": "Seçiniz",
+    "other": "Diğer",
+    "namePlaceholder": "Adınız",
+    "emailPlaceholder": "ornek@email.com",
+    "phonePlaceholder": "05XX XXX XX XX",
+    "messagePlaceholder": "Mesajınız...",
+    "required": "Zorunlu alanlar",
+    "kvkk1": "İşbu iletişim formu aracılığıyla sağlanacak olan kişisel veriler ile ilgili",
+    "aydinlatmaLink": "aydınlatma metnini",
+    "kvkk1End": "okudum ve anladım. *",
+    "kvkk2": "İşbu iletişim formunu göndererek aydınlatma metninde belirtildiği şekilde kişisel verilerimin işlenmesine açık rıza veriyorum. *",
+    "send": "Mesaj Gönder",
+    "sending": "Gönderiliyor...",
+    "successTitle": "Mesajınız Alındı",
+    "successDesc": "En kısa sürede dönüş yapacağız.",
+    "newMessage": "Yeni mesaj gönder",
+    "errorGeneric": "Bir hata oluştu. Lütfen tekrar deneyin.",
+    "errorConnection": "Bağlantı hatası. Lütfen internet bağlantınızı kontrol edin."
+  },
+  "blog": {
+    "title": "Blog",
+    "legalPosts": "Hukuki Yazılar",
+    "sub": "Güncel bilgiler ve faydalı içerikler.",
+    "backTo": "Blog"
+  },
+  "blogPost": {
+    "backTo": "Blog",
+    "otherPosts": "Diğer Yazılar",
+    "attorney": "Avukat",
+    "share": "Paylaş",
+    "toc": "İçindekiler",
+    "loading": "İçerik yükleniyor...",
+    "ctaTitle": "Danışmanlık İçin",
+    "ctaTitleHighlight": "Bize Ulaşın",
+    "ctaContact": "İletişime Geç"
+  },
+  "practiceAreas": {
+    "label": "Çalışma Alanları",
+    "intro": {
+      "title": "Hizmetlerimiz",
+      "description": "Büromuz, hukuki uyuşmazlıklara stratejik, titiz ve sonuç odaklı bir yaklaşımla çözüm üretmektedir. Her dosya, somut olayın özellikleri ve güncel yargı uygulamaları dikkate alınarak ele alınmakta; müvekkillerimize etkin ve güvenilir hukuki destek sunulmaktadır."
+    },
+    "areas": {
+      "ticaretHukuku": {
+        "title": "Ticaret Hukuku",
+        "shortDescription": "Şirket kuruluşları, ticari sözleşmeler, haksız rekabet ve ticari alacak davalarında hukuki danışmanlık.",
+        "description": "Şirket kuruluşları, ana sözleşmelerin hazırlanması ve tadili, ortaklık uyuşmazlıkları, hisse devirleri, ticari sözleşmeler, haksız rekabet, ticari alacak ve tazminat davaları ile ticari nitelikteki tüm ihtilaflarda hukuki danışmanlık ve dava takibi hizmeti sunulmaktadır.",
+        "services": ["Şirket Kuruluşları", "Ana Sözleşme Hazırlama ve Tadili", "Ortaklık Uyuşmazlıkları", "Hisse Devirleri", "Ticari Sözleşmeler", "Haksız Rekabet Davaları", "Ticari Alacak Davaları", "Tazminat Davaları"]
+      },
+      "sirketlerHukuku": {
+        "title": "Şirketler Hukuku",
+        "shortDescription": "Sermaye işlemleri, pay devri, genel kurul süreçleri ve kurumsal yapılanma desteği.",
+        "description": "Sermaye artırımı ve azaltımı, pay devri işlemleri, genel kurul ve yönetim kurulu süreçleri, şirket içi uyuşmazlıklar ve kurumsal yapılanmaya ilişkin hukuki destek sağlanmaktadır.",
+        "services": ["Sermaye Artırımı ve Azaltımı", "Pay Devri İşlemleri", "Genel Kurul Süreçleri", "Yönetim Kurulu Süreçleri", "Şirket İçi Uyuşmazlıklar", "Kurumsal Yapılanma"]
+      },
+      "sozlesmelerHukuku": {
+        "title": "Sözleşmeler Hukuku",
+        "shortDescription": "Ticari ve adi sözleşmelerin hazırlanması, incelenmesi ve uyuşmazlık çözümü.",
+        "description": "Her türlü ticari ve adi sözleşmenin hazırlanması, incelenmesi ve revize edilmesi; sözleşmeden doğan uyuşmazlıkların çözümüne yönelik hukuki destek verilmektedir.",
+        "services": ["Sözleşme Hazırlama", "Sözleşme İnceleme", "Sözleşme Revizyonu", "Sözleşme Uyuşmazlıkları", "Ticari Sözleşmeler", "Adi Sözleşmeler"]
+      },
+      "aileHukuku": {
+        "title": "Aile Hukuku",
+        "shortDescription": "Boşanma, nafaka, velayet ve mal rejimi tasfiyesinde titiz ve müvekkil odaklı temsil.",
+        "description": "Boşanma davaları, nafaka, velayet, kişisel ilişki kurulması, mal rejiminin tasfiyesi ve aile hukukundan kaynaklanan tüm uyuşmazlıklarda titiz ve müvekkil odaklı bir temsil anlayışı benimsenmektedir.",
+        "services": ["Boşanma Davaları", "Nafaka Davaları", "Velayet Davaları", "Kişisel İlişki Kurulması", "Mal Rejimi Tasfiyesi", "Anlaşmalı Boşanma", "Çekişmeli Boşanma"]
+      },
+      "mirasHukuku": {
+        "title": "Miras Hukuku",
+        "shortDescription": "Mirasın paylaşımı, veraset ilamı, tenkis ve muris muvazaası davalarında etkin hizmet.",
+        "description": "Mirasın paylaşımı, veraset ilamı, miras sözleşmeleri, tenkis davaları, muris muvazaasına dayalı davalar ve miras hukukundan doğan uyuşmazlıklarda etkin hukuki hizmet sunulmaktadır.",
+        "services": ["Mirasın Paylaşımı", "Veraset İlamı", "Miras Sözleşmeleri", "Tenkis Davaları", "Muris Muvazaası Davaları", "Miras Reddi"]
+      },
+      "borclarHukuku": {
+        "title": "Borçlar Hukuku",
+        "shortDescription": "Haksız fiil, sebepsiz zenginleşme ve sözleşmeye aykırılık uyuşmazlıklarında destek.",
+        "description": "Haksız fiil, sebepsiz zenginleşme, sözleşmeye aykırılık ve borç ilişkilerinden kaynaklanan uyuşmazlıklarda hukuki destek sağlanmaktadır.",
+        "services": ["Haksız Fiil Davaları", "Sebepsiz Zenginleşme", "Sözleşmeye Aykırılık", "Tazminat Davaları", "Alacak Davaları"]
+      },
+      "icraIflasHukuku": {
+        "title": "İcra ve İflas Hukuku",
+        "shortDescription": "İcra takipleri, haciz işlemleri, menfi tespit ve istirdat davalarının yürütülmesi.",
+        "description": "İlamsız ve ilamlı icra takipleri, haciz işlemleri, itiraz ve şikâyetler, menfi tespit ve istirdat davaları ile icra hukukundan kaynaklanan uyuşmazlıklar yürütülmektedir.",
+        "services": ["İlamsız İcra Takibi", "İlamlı İcra Takibi", "Haciz İşlemleri", "İtiraz ve Şikâyetler", "Menfi Tespit Davaları", "İstirdat Davaları"]
+      },
+      "gayrimenkulKiraHukuku": {
+        "title": "Gayrimenkul ve Kira Hukuku",
+        "shortDescription": "Taşınmaz işlemleri, kira uyuşmazlıkları, tahliye ve tapu davaları.",
+        "description": "Taşınmaz alım-satım işlemleri, kira uyuşmazlıkları, tahliye davaları, tapu iptal ve tescil davaları ile ayni haklara ilişkin ihtilaflarda hukuki destek sunulmaktadır.",
+        "services": ["Taşınmaz Alım-Satım", "Kira Uyuşmazlıkları", "Tahliye Davaları", "Tapu İptal Davaları", "Tescil Davaları", "Ayni Haklar"]
+      },
+      "isHukuku": {
+        "title": "İş Hukuku",
+        "shortDescription": "İşçi-işveren uyuşmazlıkları, işe iade, tazminat ve iş sözleşmeleri danışmanlığı.",
+        "description": "İşçi ve işveren ilişkilerinden doğan uyuşmazlıklar, işe iade davaları, kıdem ve ihbar tazminatı, iş sözleşmelerinin hazırlanması ve fesih süreçlerine ilişkin hukuki danışmanlık sağlanmaktadır.",
+        "services": ["İşe İade Davaları", "Kıdem Tazminatı", "İhbar Tazminatı", "İş Sözleşmeleri", "Fesih Süreçleri", "İşçi-İşveren Uyuşmazlıkları"]
+      },
+      "hukukiDanismanlik": {
+        "title": "Hukuki Danışmanlık",
+        "shortDescription": "Bireysel ve kurumsal müvekkillere risk analizi ve süreç yönetimi hizmeti.",
+        "description": "Bireysel ve kurumsal müvekkillere; uyuşmazlık doğmadan önce risk analizi yapılması, hukuki görüş oluşturulması ve süreç yönetimi kapsamında düzenli hukuki danışmanlık hizmeti verilmektedir.",
+        "services": ["Risk Analizi", "Hukuki Görüş Oluşturma", "Süreç Yönetimi", "Kurumsal Danışmanlık", "Bireysel Danışmanlık", "Düzenli Hukuki Destek"]
+      }
+    },
+    "ctaTitle": "Hangi Alanda",
+    "ctaTitleHighlight": "Yardım İstiyorsunuz?",
+    "ctaDesc": "Size en uygun çözümü birlikte bulalım.",
+    "ctaButton": "Ücretsiz Danışmanlık",
+    "backTo": "Hizmetlerimiz",
+    "ourServices": "Sunduğumuz Hizmetler",
+    "ourProcess": "Çalışma Sürecimiz",
+    "step1": "Ön Değerlendirme",
+    "step1Desc": "Hukuki durumunuzu dinliyor, somut olayın özelliklerini değerlendiriyoruz.",
+    "step2": "Strateji Belirleme",
+    "step2Desc": "Güncel yargı uygulamaları ışığında en uygun hukuki stratejiyi belirliyoruz.",
+    "step3": "Süreç Yönetimi",
+    "step3Desc": "Dosyanızı titizlikle takip ediyor, her aşamada sizi bilgilendiriyoruz.",
+    "step4": "Sonuç Odaklı Takip",
+    "step4Desc": "Hedefe ulaşana kadar kararlılıkla yanınızda oluyoruz.",
+    "freeConsult": "Ücretsiz Ön Görüşme",
+    "freeConsultDesc": "alanında hukuki destek almak için bizimle iletişime geçin.",
+    "otherServices": "Diğer Hizmetlerimiz",
+    "seeAll": "Tümünü Gör",
+    "ctaSupport": "Konusunda",
+    "ctaSupportHighlight": "Destek Alın",
+    "ctaSupportDesc": "Hukuki sorunlarınız için profesyonel çözümler sunuyoruz.",
+    "ctaSupportFor": "",
+    "ctaContact": "İletişime Geç",
+    "bookAppointment": "Randevu Al"
+  },
+  "faq": {
+    "label": "S.S.S",
+    "title": "Sıkça Sorulan Sorular",
+    "sub": "Merak ettiğiniz soruların cevapları.",
+    "ctaTitle": "Sorunuzun Cevabını Bulamadınız mı?",
+    "ctaDesc": "Bizimle iletişime geçebilirsiniz.",
+    "ctaContact": "İletişime Geç",
+    "ctaCall": "Bizi Arayın"
+  },
+  "legal": {
+    "kvkk": "KVKK",
+    "legal": "Yasal",
+    "aydinlatma": "Aydınlatma Metni",
+    "aydinlatmaSub": "İletişim Formumuz Üzerinden Toplanan Kişisel Verilerinize İlişkin",
+    "cerez": "Çerez Politikası",
+    "kullanim": "Kullanım Koşulları",
+    "enOnlyNotice": "Bu sayfa şu an Türkçe olarak sunulmaktadır. İngilizce metin için bizimle iletişime geçebilirsiniz."
+  },
+  "notFound": {
+    "title": "Sayfa Bulunamadı",
+    "desc": "Aradığınız sayfa mevcut değil veya taşınmış olabilir.",
+    "home": "Anasayfaya Dön",
+    "contact": "İletişime Geç"
+  },
+  "loading": {
+    "text": "Yükleniyor..."
+  },
+  "lang": {
+    "tr": "Türkçe",
+    "en": "English",
+    "aria": "Dil seçin"
+  }
+}

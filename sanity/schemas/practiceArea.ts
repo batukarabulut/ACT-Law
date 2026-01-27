@@ -2,13 +2,17 @@ import { defineField, defineType } from "sanity";
 
 export const practiceArea = defineType({
   name: "practiceArea",
-  title: "Çalışma Alanları",
+  title: "Çalışma Alanları / Practice Areas",
   type: "document",
   fields: [
     defineField({
       name: "title",
-      title: "Başlık",
-      type: "string",
+      title: "Başlık / Title",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "string", validation: (Rule) => Rule.required() },
+        { name: "en", title: "English", type: "string", validation: (Rule) => Rule.required() },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -16,31 +20,51 @@ export const practiceArea = defineType({
       title: "URL",
       type: "slug",
       options: {
-        source: "title",
+        source: "title.tr",
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "shortDescription",
-      title: "Kısa Açıklama",
-      type: "text",
-      rows: 2,
+      title: "Kısa Açıklama / Short Description",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "text", rows: 2 },
+        { name: "en", title: "English", type: "text", rows: 2 },
+      ],
       description: "Ana sayfada görünecek kısa açıklama",
     }),
     defineField({
       name: "description",
-      title: "Detaylı Açıklama",
-      type: "text",
-      rows: 5,
+      title: "Detaylı Açıklama / Description",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "text", rows: 5, validation: (Rule) => Rule.required() },
+        { name: "en", title: "English", type: "text", rows: 5, validation: (Rule) => Rule.required() },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "services",
-      title: "Alt Hizmetler",
-      type: "array",
-      of: [{ type: "string" }],
-      description: "Bu alandaki spesifik hizmetler",
+      title: "Alt Hizmetler / Services",
+      type: "object",
+      fields: [
+        { 
+          name: "tr", 
+          title: "Türkçe", 
+          type: "array", 
+          of: [{ type: "string" }],
+          description: "Bu alandaki spesifik hizmetler (Türkçe)"
+        },
+        { 
+          name: "en", 
+          title: "English", 
+          type: "array", 
+          of: [{ type: "string" }],
+          description: "Bu alandaki spesifik hizmetler (English)"
+        },
+      ],
     }),
     defineField({
       name: "order",
@@ -58,8 +82,8 @@ export const practiceArea = defineType({
   ],
   preview: {
     select: {
-      title: "title",
-      subtitle: "shortDescription",
+      title: "title.tr",
+      subtitle: "title.en",
     },
   },
 });

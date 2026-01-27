@@ -1,71 +1,83 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { getSiteConfig, getPracticeAreas, getPracticeAreasIntro, getBlogPosts, getAboutContent } from "@/sanity/lib/fetch";
 import AnimatedHero from "@/components/AnimatedHero";
+import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
-export default async function Home() {
+type Props = { params: Promise<{ locale: string }> };
+
+export default async function Home({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const [siteConfig, practiceAreas, practiceAreasIntro, blogPosts, aboutContent] = await Promise.all([
-    getSiteConfig(),
-    getPracticeAreas(),
-    getPracticeAreasIntro(),
-    getBlogPosts(),
-    getAboutContent(),
+    getSiteConfig(locale),
+    getPracticeAreas(locale),
+    getPracticeAreasIntro(locale),
+    getBlogPosts(locale),
+    getAboutContent(locale),
   ]);
+
+  const t = await getTranslations("home");
+  const tPracticeAreas = await getTranslations("practiceAreas");
 
   return (
     <>
-      {/* Animated Hero Section */}
       <AnimatedHero phone={siteConfig.phone} />
 
-      {/* Practice Areas */}
-      <section className="py-20 lg:py-28 bg-[#1e1e1e]">
+      <section className="py-20 lg:py-28 bg-[#f7f7f7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
           <div className="max-w-3xl mb-16">
             <p className="text-[11px] tracking-wider uppercase text-[#10b981] mb-3">
-              Çalışma Alanları
+              {t("practiceAreaLabel")}
             </p>
-            <h2 className="text-3xl md:text-4xl font-serif text-white">
-              {practiceAreasIntro.title}
+            <h2 className="text-3xl md:text-4xl font-serif text-[#111]">
+              {practiceAreasIntro?.title || tPracticeAreas("intro.title")}
             </h2>
-            <p className="mt-4 text-gray-400 leading-relaxed">
-              {practiceAreasIntro.description}
+            <p className="mt-4 text-gray-600 leading-relaxed">
+              {practiceAreasIntro?.description || tPracticeAreas("intro.description")}
             </p>
           </div>
 
-          {/* Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-white/5">
-            {practiceAreas.slice(0, 8).map((area, index) => (
-              <Link
-                key={area.slug}
-                href={`/calisma-alanlari/${area.slug}`}
-                className="group p-6 bg-[#1e1e1e] hover:bg-[#262626] transition-all duration-300 border border-white/5 hover:border-[#10b981]/30"
-              >
-                <span className="text-[#10b981] text-sm font-medium">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="mt-3 text-lg font-serif text-white transition-colors">
-                  {area.title}
-                </h3>
-                <p className="mt-2 text-sm text-gray-500 group-hover:text-gray-400 transition-colors line-clamp-2">
-                  {area.shortDescription}
-                </p>
-                <div className="mt-4 flex items-center gap-2 text-sm text-[#10b981] opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1">
-                  <span>Detay</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </Link>
-            ))}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {practiceAreas.slice(0, 8).map((area, index) => {
+              // Artık Sanity'den locale'e göre çekildiği için translation'a gerek yok
+              const title = area.title;
+              const shortDescription = area.shortDescription;
+
+              return (
+                <Link
+                  key={area.slug}
+                  href={`/calisma-alanlari/${area.slug}`}
+                  className="group p-6 bg-[#fafafa] border border-gray-200/90 rounded-lg hover:border-[#10b981]/30 hover:shadow-sm hover:bg-[#fcfcfc] transition-all duration-300"
+                >
+                  <span className="text-[#10b981] text-sm font-medium">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-3 text-lg font-serif text-[#111] group-hover:text-[#10b981] transition-colors">
+                    {title}
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-600 line-clamp-2">
+                    {shortDescription}
+                  </p>
+                  <div className="mt-4 flex items-center gap-2 text-sm text-[#10b981] opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1">
+                    <span>{t("detail")}</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
           <div className="text-center mt-12">
             <Link
               href="/calisma-alanlari"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-[#10b981]/30 text-[#10b981] font-medium hover:bg-[#10b981]/10 hover:gap-3 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-[#10b981]/30 text-[#10b981] font-medium hover:bg-[#10b981]/5 hover:gap-3 transition-all"
             >
-              <span>Tüm Hizmetleri Gör</span>
+              <span>{t("seeAll")}</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -74,58 +86,53 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 lg:py-28 bg-[#1a1a1a]">
+      <section className="py-20 lg:py-28 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Image */}
             <div className="relative order-2 lg:order-1">
-              <div className="aspect-square bg-[#262626] max-w-md relative overflow-hidden border border-white/5">
+              <div className="aspect-square bg-[#f2f2f2] max-w-md relative overflow-hidden border border-gray-200/90">
                 <Image
                   src="/avukat.jpg"
-                  alt={aboutContent.name}
+                  alt={aboutContent.name || ""}
                   fill
                   className="object-cover object-top"
                 />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/[0.03] to-transparent" />
               </div>
-              <div className="absolute top-6 left-6 w-full h-full border border-[#10b981]/30 -z-10 max-w-md" />
-              {/* Experience badge */}
+              <div className="absolute top-6 left-6 w-full h-full border border-[#10b981]/25 -z-10 max-w-md" />
               <div className="absolute -bottom-4 -right-4 bg-[#10b981] text-white p-6">
                 <div className="text-3xl font-serif font-semibold">10+</div>
-                <div className="text-sm text-white/70 mt-1">Yıllık Deneyim</div>
+                <div className="text-sm text-white/70 mt-1">{t("yearsExp")}</div>
               </div>
             </div>
 
-            {/* Content */}
             <div className="order-1 lg:order-2">
               <p className="text-[11px] tracking-wider uppercase text-[#10b981] mb-3">
-                Hakkımızda
+                {t("aboutLabel")}
               </p>
-              <h2 className="text-3xl md:text-4xl font-serif text-white">
-                {aboutContent.name}
+              <h2 className="text-3xl md:text-4xl font-serif text-[#111]">
+                {aboutContent.name || ""}
               </h2>
-              <p className="mt-6 text-gray-400 leading-relaxed">
-                {aboutContent.bio.split("\n\n")[0]}
+              <p className="mt-6 text-gray-600 leading-relaxed">
+                {aboutContent.bio ? aboutContent.bio.split("\n\n")[0] : ""}
               </p>
-              
+
               <div className="mt-8 grid grid-cols-2 gap-4">
-                {aboutContent.values.map((value, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 bg-white/5 border border-white/5">
+                {aboutContent.values?.map((value, index) => (
+                  <div key={index} className="flex items-start gap-3 p-4 bg-[#fcfcfc] border border-gray-200/90 rounded-lg">
                     <div className="w-2 h-2 bg-[#10b981] rounded-full mt-1.5 flex-shrink-0" />
                     <div>
-                      <h4 className="font-medium text-white text-sm">{value.title}</h4>
+                      <h4 className="font-medium text-[#111] text-sm">{value.title || ""}</h4>
                     </div>
                   </div>
-                ))}
+                )) || []}
               </div>
 
               <Link
                 href="/hakkimizda"
-                className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-white/5 border border-white/10 text-white text-sm font-medium hover:bg-white/10 hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-[#f5f5f5] border border-gray-200/90 text-[#111] text-sm font-medium hover:bg-[#f0f0f0] hover:border-gray-200 hover:gap-3 transition-all"
               >
-                <span>Daha Fazla Bilgi</span>
+                <span>{t("moreInfo")}</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -135,37 +142,34 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Blog Section */}
-      <section className="py-20 lg:py-28 bg-[#1e1e1e]">
+      <section className="py-20 lg:py-28 bg-[#2a2a2a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
           <div className="flex justify-between items-end mb-12">
             <div>
               <p className="text-[11px] tracking-wider uppercase text-[#10b981] mb-3">
-                Blog
+                {t("blogLabel")}
               </p>
               <h2 className="text-3xl md:text-4xl font-serif text-white">
-                Son Yazılar
+                {t("latestPosts")}
               </h2>
             </div>
             <Link
               href="/blog"
               className="hidden sm:inline-flex items-center gap-2 text-[#10b981] text-sm font-medium hover:gap-3 transition-all"
             >
-              <span>Tümünü Gör</span>
+              <span>{t("seeAllPosts")}</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
           </div>
 
-          {/* Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.slice(0, 3).map((post) => (
               <article key={post.slug} className="group">
                 <Link href={`/blog/${post.slug}`}>
-                  <div className="aspect-[16/10] bg-[#262626] mb-5 overflow-hidden border border-white/5 group-hover:border-[#10b981]/30 transition-colors">
-                    <div className="w-full h-full bg-gradient-to-br from-[#262626] to-[#333] group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                  <div className="aspect-[16/10] bg-[#2a2a2a] mb-5 overflow-hidden border border-white/10 group-hover:border-[#10b981]/30 transition-colors">
+                    <div className="w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#383838] group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
                       <svg className="w-12 h-12 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                       </svg>
@@ -189,7 +193,7 @@ export default async function Home() {
             href="/blog"
             className="sm:hidden inline-flex items-center gap-2 mt-8 text-[#10b981] text-sm font-medium"
           >
-            <span>Tüm Yazılar</span>
+            <span>{t("allPosts")}</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -197,28 +201,25 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 lg:py-28 bg-gradient-to-b from-[#1a1a1a] to-[#1e1e1e] relative overflow-hidden">
-        {/* Background effect */}
+      <section className="py-20 lg:py-28 bg-gradient-to-b from-[#242424] to-[#2a2a2a] relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#10b981]/5 rounded-full blur-[150px]" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white max-w-2xl mx-auto">
-            Hukuki Danışmanlık İçin
-            <span className="text-[#10b981]"> Bize Ulaşın</span>
+            {t("ctaTitle")}
+            <span className="text-[#10b981]"> {t("ctaTitleHighlight")}</span>
           </h2>
           <p className="mt-6 text-gray-400 max-w-lg mx-auto">
-            İlk görüşmemiz ücretsizdir. Hukuki sorunlarınızı dinler, 
-            size en uygun çözüm yolunu belirleriz.
+            {t("ctaDesc")}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
               href="/iletisim"
               className="group px-8 py-4 bg-[#10b981] text-white text-sm font-medium hover:bg-[#059669] transition-all flex items-center gap-2"
             >
-              <span>İletişime Geç</span>
+              <span>{t("ctaContact")}</span>
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

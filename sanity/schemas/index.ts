@@ -4,6 +4,7 @@ import { practiceAreasIntro } from "./practiceAreasIntro";
 import { blogPost } from "./blogPost";
 import { faq } from "./faq";
 import { about } from "./about";
+import { legalContent, warningBox } from "./legalContent";
 
 export const schemaTypes = [
   siteConfig,
@@ -12,4 +13,6 @@ export const schemaTypes = [
   blogPost,
   faq,
   about,
+  warningBox,
+  legalContent,
 ];

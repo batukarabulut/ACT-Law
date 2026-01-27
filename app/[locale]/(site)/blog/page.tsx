@@ -1,27 +1,38 @@
 import { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { getBlogPosts } from "@/sanity/lib/fetch";
+import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "Hukuki konularda güncel yazılar ve makaleler.",
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function BlogPage() {
-  const blogPosts = await getBlogPosts();
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
+  return {
+    title: t("title"),
+    description: "Hukuki konularda güncel yazılar ve makaleler.",
+  };
+}
+
+export default async function BlogPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const blogPosts = await getBlogPosts(locale);
+  const t = await getTranslations("blog");
 
   return (
     <>
-      {/* Hero */}
-      <section className="py-16 lg:py-24 bg-[#1a1a1a]">
+      <section className="py-24 lg:py-32 bg-[#1c1c1c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-[11px] tracking-wider uppercase text-[#10b981] mb-3">Blog</p>
-          <h1 className="text-4xl md:text-5xl font-serif text-white">Hukuki Yazılar</h1>
-          <p className="mt-4 text-gray-400">Güncel bilgiler ve faydalı içerikler.</p>
+          <p className="text-[11px] tracking-wider uppercase text-[#10b981] mb-3">{t("title")}</p>
+          <h1 className="text-4xl md:text-5xl font-serif text-white">{t("legalPosts")}</h1>
+          <p className="mt-4 text-gray-400">{t("sub")}</p>
         </div>
       </section>
 
-      {/* Posts */}
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

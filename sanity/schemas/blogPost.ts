@@ -2,13 +2,17 @@ import { defineField, defineType } from "sanity";
 
 export const blogPost = defineType({
   name: "blogPost",
-  title: "Blog Yazıları",
+  title: "Blog Yazıları / Blog Posts",
   type: "document",
   fields: [
     defineField({
       name: "title",
-      title: "Başlık",
-      type: "string",
+      title: "Başlık / Title",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "string", validation: (Rule) => Rule.required() },
+        { name: "en", title: "English", type: "string", validation: (Rule) => Rule.required() },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -16,16 +20,19 @@ export const blogPost = defineType({
       title: "URL",
       type: "slug",
       options: {
-        source: "title",
+        source: "title.tr",
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "excerpt",
-      title: "Özet",
-      type: "text",
-      rows: 3,
+      title: "Özet / Excerpt",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "text", rows: 3 },
+        { name: "en", title: "English", type: "text", rows: 3 },
+      ],
       description: "Listelerde görünecek kısa özet",
     }),
     defineField({
@@ -38,51 +45,79 @@ export const blogPost = defineType({
     }),
     defineField({
       name: "content",
-      title: "İçerik",
-      type: "array",
-      of: [
+      title: "İçerik / Content",
+      type: "object",
+      fields: [
         {
-          type: "block",
-          styles: [
-            { title: "Normal", value: "normal" },
-            { title: "H2", value: "h2" },
-            { title: "H3", value: "h3" },
-            { title: "H4", value: "h4" },
-            { title: "Alıntı", value: "blockquote" },
+          name: "tr",
+          title: "Türkçe",
+          type: "array",
+          of: [
+            {
+              type: "block",
+              styles: [
+                { title: "Normal", value: "normal" },
+                { title: "H2", value: "h2" },
+                { title: "H3", value: "h3" },
+                { title: "H4", value: "h4" },
+                { title: "Alıntı", value: "blockquote" },
+              ],
+              marks: {
+                decorators: [
+                  { title: "Kalın", value: "strong" },
+                  { title: "İtalik", value: "em" },
+                  { title: "Altı Çizili", value: "underline" },
+                ],
+              },
+            },
+            {
+              type: "image",
+              options: { hotspot: true },
+            },
           ],
-          marks: {
-            decorators: [
-              { title: "Kalın", value: "strong" },
-              { title: "İtalik", value: "em" },
-              { title: "Altı Çizili", value: "underline" },
-            ],
-          },
+          validation: (Rule) => Rule.required(),
         },
         {
-          type: "image",
-          options: { hotspot: true },
+          name: "en",
+          title: "English",
+          type: "array",
+          of: [
+            {
+              type: "block",
+              styles: [
+                { title: "Normal", value: "normal" },
+                { title: "H2", value: "h2" },
+                { title: "H3", value: "h3" },
+                { title: "H4", value: "h4" },
+                { title: "Quote", value: "blockquote" },
+              ],
+              marks: {
+                decorators: [
+                  { title: "Bold", value: "strong" },
+                  { title: "Italic", value: "em" },
+                  { title: "Underline", value: "underline" },
+                ],
+              },
+            },
+            {
+              type: "image",
+              options: { hotspot: true },
+            },
+          ],
+          validation: (Rule) => Rule.required(),
         },
       ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "category",
-      title: "Kategori",
-      type: "string",
-      options: {
-        list: [
-          { title: "Ticaret Hukuku", value: "Ticaret Hukuku" },
-          { title: "Şirketler Hukuku", value: "Şirketler Hukuku" },
-          { title: "Sözleşmeler Hukuku", value: "Sözleşmeler Hukuku" },
-          { title: "Aile Hukuku", value: "Aile Hukuku" },
-          { title: "Miras Hukuku", value: "Miras Hukuku" },
-          { title: "Borçlar Hukuku", value: "Borçlar Hukuku" },
-          { title: "İcra ve İflas Hukuku", value: "İcra ve İflas Hukuku" },
-          { title: "Gayrimenkul Hukuku", value: "Gayrimenkul Hukuku" },
-          { title: "İş Hukuku", value: "İş Hukuku" },
-          { title: "Genel", value: "Genel" },
-        ],
-      },
+      title: "Kategori / Category",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "string", validation: (Rule) => Rule.required() },
+        { name: "en", title: "English", type: "string", validation: (Rule) => Rule.required() },
+      ],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "readTime",
@@ -106,13 +141,14 @@ export const blogPost = defineType({
   ],
   preview: {
     select: {
-      title: "title",
+      title: "title.tr",
+      titleEn: "title.en",
       media: "mainImage",
       date: "publishedAt",
     },
-    prepare({ title, media, date }) {
+    prepare({ title, titleEn, media, date }) {
       return {
-        title,
+        title: title || titleEn,
         media,
         subtitle: date ? new Date(date).toLocaleDateString("tr-TR") : "",
       };

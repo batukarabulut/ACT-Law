@@ -2,19 +2,27 @@ import { defineField, defineType } from "sanity";
 
 export const about = defineType({
   name: "about",
-  title: "Hakkımızda",
+  title: "Hakkımızda / About",
   type: "document",
   fields: [
     defineField({
       name: "name",
-      title: "İsim",
-      type: "string",
+      title: "İsim / Name",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "string", validation: (Rule) => Rule.required() },
+        { name: "en", title: "English", type: "string", validation: (Rule) => Rule.required() },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "title",
-      title: "Ünvan",
-      type: "string",
+      title: "Ünvan / Title",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "string" },
+        { name: "en", title: "English", type: "string" },
+      ],
     }),
     defineField({
       name: "image",
@@ -26,27 +34,46 @@ export const about = defineType({
     }),
     defineField({
       name: "bio",
-      title: "Biyografi",
-      type: "text",
-      rows: 8,
+      title: "Biyografi / Biography",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "text", rows: 8, validation: (Rule) => Rule.required() },
+        { name: "en", title: "English", type: "text", rows: 8, validation: (Rule) => Rule.required() },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "education",
-      title: "Eğitim",
+      title: "Eğitim / Education",
       type: "array",
       of: [
         {
           type: "object",
           fields: [
-            { name: "degree", title: "Derece", type: "string" },
-            { name: "school", title: "Okul", type: "string" },
-            { name: "year", title: "Yıl", type: "string" },
+            { 
+              name: "degree", 
+              title: "Derece / Degree", 
+              type: "object",
+              fields: [
+                { name: "tr", title: "Türkçe", type: "string" },
+                { name: "en", title: "English", type: "string" },
+              ],
+            },
+            { 
+              name: "school", 
+              title: "Okul / School", 
+              type: "object",
+              fields: [
+                { name: "tr", title: "Türkçe", type: "string" },
+                { name: "en", title: "English", type: "string" },
+              ],
+            },
+            { name: "year", title: "Yıl / Year", type: "string" },
           ],
           preview: {
             select: {
-              title: "degree",
-              subtitle: "school",
+              title: "degree.tr",
+              subtitle: "school.tr",
             },
           },
         },
@@ -54,24 +81,53 @@ export const about = defineType({
     }),
     defineField({
       name: "certifications",
-      title: "Sertifikalar",
-      type: "array",
-      of: [{ type: "string" }],
+      title: "Sertifikalar / Certifications",
+      type: "object",
+      fields: [
+        { 
+          name: "tr", 
+          title: "Türkçe", 
+          type: "array", 
+          of: [{ type: "string" }] 
+        },
+        { 
+          name: "en", 
+          title: "English", 
+          type: "array", 
+          of: [{ type: "string" }] 
+        },
+      ],
     }),
     defineField({
       name: "values",
-      title: "Değerler",
+      title: "Değerler / Values",
       type: "array",
       of: [
         {
           type: "object",
           fields: [
-            { name: "title", title: "Başlık", type: "string" },
-            { name: "description", title: "Açıklama", type: "text", rows: 2 },
+            { 
+              name: "title", 
+              title: "Başlık / Title", 
+              type: "object",
+              fields: [
+                { name: "tr", title: "Türkçe", type: "string" },
+                { name: "en", title: "English", type: "string" },
+              ],
+            },
+            { 
+              name: "description", 
+              title: "Açıklama / Description", 
+              type: "object",
+              fields: [
+                { name: "tr", title: "Türkçe", type: "text", rows: 2 },
+                { name: "en", title: "English", type: "text", rows: 2 },
+              ],
+            },
           ],
           preview: {
             select: {
-              title: "title",
+              title: "title.tr",
             },
           },
         },

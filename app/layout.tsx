@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/data";
@@ -35,13 +36,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const locale = headersList.get("x-next-intl-locale") || "tr";
+
   return (
-    <html lang="tr" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${playfair.variable} ${inter.variable} antialiased`}
         suppressHydrationWarning

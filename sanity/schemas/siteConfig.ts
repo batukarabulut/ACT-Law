@@ -43,8 +43,12 @@ export const siteConfig = defineType({
     }),
     defineField({
       name: "workingHours",
-      title: "Çalışma Saatleri",
-      type: "string",
+      title: "Çalışma Saatleri / Working Hours",
+      type: "object",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "string" },
+        { name: "en", title: "English", type: "string" },
+      ],
     }),
   ],
   preview: {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
+import { useTranslations } from "next-intl";
 
 interface Heading {
   id: string;
@@ -42,7 +43,7 @@ const portableTextComponents: PortableTextComponents = {
       <h4 className="text-lg font-serif text-[#111] mt-6 mb-2">{children}</h4>
     ),
     normal: ({ children, value }) => {
-      const text = (value?.children || []).map((c: { text?: string }) => c.text || "").join("").trim();
+      const text = (value?.children || []).map((c) => (typeof c === "object" && c && "text" in c ? (c as { text?: string }).text : "") || "").join("").trim();
       // ## / ### / #### ile başlayan satırlar -> başlık
       if (text.startsWith("## ")) {
         return (
@@ -125,6 +126,7 @@ const portableTextComponents: PortableTextComponents = {
 };
 
 export default function BlogPostContent({ content, title, slug, shareUrl }: BlogPostContentProps) {
+  const t = useTranslations("blogPost");
   const [progress, setProgress] = useState(0);
   const [activeHeading, setActiveHeading] = useState<string>("");
   const [headings, setHeadings] = useState<Heading[]>([]);
@@ -288,7 +290,7 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
   // Render content - either Portable Text or plain string
   const renderContent = () => {
     if (!content) {
-      return <p className="text-gray-500">İçerik yükleniyor...</p>;
+      return <p className="text-gray-500">{t("loading")}</p>;
     }
 
     if (isPortableText) {
@@ -347,8 +349,8 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
   return (
     <div className="relative">
       {/* Table of Contents - Left Sidebar */}
-      {headings.length > 0 && (
-        <div className="hidden xl:block fixed left-8 2xl:left-[calc((100vw-1280px)/2-220px)] top-1/2 -translate-y-1/2 w-56">
+      {headings.length > 0 && progress < 100 && (
+        <div className="hidden xl:block fixed left-8 2xl:left-[calc((100vw-1280px)/2-220px)] top-1/2 -translate-y-1/2 w-56 transition-opacity duration-300">
           <nav className="space-y-1">
             {headings.map((heading) => (
               <button
@@ -387,7 +389,7 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
       <div className="hidden xl:block fixed right-8 2xl:right-[calc((100vw-1280px)/2-80px)] top-1/2 -translate-y-1/2">
         <div className="flex flex-col items-center gap-1">
           <span className="text-xs font-medium tracking-wider uppercase text-gray-400 mb-2">
-            Paylaş
+            {t("share")}
           </span>
           {shareLinks.map((link) => (
             <a
@@ -405,10 +407,10 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
       </div>
 
       {/* Mobile Share & TOC */}
-      {headings.length > 0 && (
-        <div className="xl:hidden mb-8 p-4 bg-gray-50 rounded-lg">
+      {headings.length > 0 && progress < 100 && (
+        <div className="xl:hidden mb-8 p-4 bg-gray-50 rounded-lg transition-opacity duration-300">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-gray-700">İçindekiler</span>
+            <span className="text-sm font-medium text-gray-700">{t("toc")}</span>
             <span className="text-sm text-[#10b981] font-medium">%{progress}</span>
           </div>
           <div className="h-1 bg-gray-200 rounded-full overflow-hidden mb-4">
@@ -433,7 +435,7 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Paylaş:</span>
+            <span className="text-xs text-gray-500">{t("share")}:</span>
             {shareLinks.map((link) => (
               <a
                 key={link.name}

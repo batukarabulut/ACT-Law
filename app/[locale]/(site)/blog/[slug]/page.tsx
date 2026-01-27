@@ -1,30 +1,50 @@
 import { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { getBlogPosts, getBlogPostBySlug, getSiteConfig } from "@/sanity/lib/fetch";
 import BlogPostContent from "@/components/BlogPostContent";
+import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export async function generateStaticParams() {
-  const blogPosts = await getBlogPosts();
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  // Artık tek document var, her dil için aynı slug kullanılacak
+  const blogPosts = await getBlogPosts("tr"); // Slug'lar Türkçe'den geliyor
+  return routing.locales.flatMap((locale) =>
+    blogPosts.map((post) => ({ locale, slug: post.slug }))
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
-  if (!post) return { title: "Sayfa Bulunamadı" };
-  return { title: post.title, description: post.excerpt };
+  const { locale, slug } = await params;
+  const post = await getBlogPostBySlug(slug, locale);
+  const t = await getTranslations({ locale, namespace: "notFound" });
+  if (!post) return { title: t("title") };
+  const metaTitle =
+    typeof post.title === "string"
+      ? post.title
+      : (post as any)?.title?.[locale as keyof typeof post.title] ??
+        (post as any)?.title?.tr ??
+        (post as any)?.title?.en ??
+        "";
+
+  const metaDescription =
+    typeof post.excerpt === "string" ? post.excerpt : undefined;
+
+  return { title: metaTitle, description: metaDescription };
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+
   const [blogPosts, post, siteConfig, headersList] = await Promise.all([
-    getBlogPosts(),
-    getBlogPostBySlug(slug),
-    getSiteConfig(),
+    getBlogPosts(locale),
+    getBlogPostBySlug(slug, locale),
+    getSiteConfig(locale),
     headers(),
   ]);
 
@@ -32,42 +52,40 @@ export default async function BlogPostPage({ params }: Props) {
 
   const host = headersList.get("x-forwarded-host") || headersList.get("host") || "localhost:3000";
   const proto = headersList.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
-  const shareUrl = `${proto}://${host}/blog/${slug}`;
+  const shareUrl = `${proto}://${host}/${locale === "tr" ? "" : "en/"}blog/${slug}`;
 
   const otherPosts = blogPosts.filter((p) => p.slug !== slug).slice(0, 3);
+  const t = await getTranslations("blogPost");
 
   return (
     <>
-      {/* Hero */}
-      <section className="py-16 lg:py-24 bg-[#1a1a1a]">
+      <section className="py-24 lg:py-40 bg-[#1c1c1c]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#10b981] mb-6">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#10b981] mb-8">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            Blog
+            {t("backTo")}
           </Link>
-          <div className="text-xs text-[#10b981] uppercase tracking-wider mb-4">
+          <div className="text-xs text-[#10b981] uppercase tracking-wider mb-6">
             {post.category} • {post.readTime}
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white leading-tight">
             {post.title}
           </h1>
-          <p className="mt-6 text-lg text-gray-400">{post.excerpt}</p>
+          <p className="mt-8 text-lg text-gray-400">{post.excerpt}</p>
         </div>
       </section>
 
-      {/* Content */}
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <BlogPostContent 
-            content={post.content} 
-            title={post.title} 
+          <BlogPostContent
+            content={post.content}
+            title={post.title}
             slug={post.slug}
             shareUrl={shareUrl}
           />
 
-          {/* Author */}
           <div className="mt-12 pt-8 border-t border-gray-100 flex items-center gap-4">
             <div className="w-12 h-12 bg-[#1a1a1a] rounded-full flex items-center justify-center">
               <svg className="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,16 +94,15 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
             <div>
               <p className="font-medium text-[#111]">{siteConfig.name}</p>
-              <p className="text-sm text-gray-400">Avukat</p>
+              <p className="text-sm text-gray-400">{t("attorney")}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Other Posts */}
       <section className="py-16 lg:py-20 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-serif text-[#111] mb-8">Diğer Yazılar</h2>
+          <h2 className="text-2xl font-serif text-[#111] mb-8">{t("otherPosts")}</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {otherPosts.map((p) => (
               <Link key={p.slug} href={`/blog/${p.slug}`} className="group">
@@ -98,12 +115,11 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 lg:py-20 bg-[#1a1a1a] text-white text-center">
+      <section className="py-16 lg:py-20 bg-[#1e1e1e] text-white text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif">Danışmanlık İçin <span className="text-[#10b981]">Bize Ulaşın</span></h2>
+          <h2 className="text-3xl font-serif">{t("ctaTitle")} <span className="text-[#10b981]">{t("ctaTitleHighlight")}</span></h2>
           <Link href="/iletisim" className="inline-block mt-8 px-8 py-4 bg-[#10b981] text-white text-sm font-medium hover:bg-[#059669] transition-colors">
-            İletişime Geç
+            {t("ctaContact")}
           </Link>
         </div>
       </section>

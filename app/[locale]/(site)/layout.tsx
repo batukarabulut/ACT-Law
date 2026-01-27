@@ -1,4 +1,3 @@
-import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -10,7 +9,6 @@ export default function SiteLayout({
 }) {
   return (
     <>
-      <TopBar />
       <Navbar />
       <main>{children}</main>
       <Footer />

@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 interface AnimatedHeroProps {
   phone: string;
 }
 
-// Pre-defined particle positions to avoid hydration mismatch
 const particlePositions = [
   { left: 5, top: 10, delay: 0.5, duration: 8 },
   { left: 15, top: 25, delay: 1.2, duration: 12 },
@@ -32,30 +32,78 @@ const particlePositions = [
 ];
 
 export default function AnimatedHero({ phone }: AnimatedHeroProps) {
+  const t = useTranslations("hero");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
+  const [cursorPos, setCursorPos] = useState<{ x: number; y: number } | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const rafRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      setMouse({ x, y });
+      setCursorPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      rafRef.current = undefined;
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setMouse({ x: 0.5, y: 0.5 });
+    setCursorPos(null);
+  }, []);
+
+  const tx = (mouse.x - 0.5) * 48;
+  const ty = (mouse.y - 0.5) * 48;
+  const rx = (mouse.y - 0.5) * -5;
+  const ry = (mouse.x - 0.5) * 5;
+
   return (
-    <section className="min-h-screen bg-[#1a1a1a] relative overflow-hidden flex items-center">
-      {/* Animated Background */}
+    <section
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="min-h-[calc(100vh-5rem)] bg-[#1e1e1e] relative overflow-hidden flex items-center"
+    >
       <div className="absolute inset-0">
-        {/* Gradient Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#10b981]/10 rounded-full blur-[120px] animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#10b981]/5 rounded-full blur-[100px] animate-pulse-slower" />
-        
-        {/* Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]"
+        <div
+          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#10b981]/10 rounded-full blur-[120px] transition-transform duration-300 ease-out"
+          style={{ transform: `translate(${tx}px, ${ty}px)` }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#10b981]/5 rounded-full blur-[100px] transition-transform duration-300 ease-out"
+          style={{ transform: `translate(${-tx * 0.7}px, ${-ty * 0.7}px)` }}
+        />
+
+        {cursorPos && (
+          <div
+            className="absolute w-[320px] h-[320px] rounded-full bg-[#10b981]/8 blur-[90px] pointer-events-none"
+            style={{
+              left: cursorPos.x,
+              top: cursorPos.y,
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+        )}
+
+        <div
+          className="absolute inset-0 opacity-[0.03] transition-transform duration-300 ease-out"
           style={{
             backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px'
+            backgroundSize: "60px 60px",
+            transform: `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`,
           }}
         />
 
-        {/* Floating particles */}
         <div className="absolute inset-0">
           {particlePositions.map((particle, i) => (
             <div
@@ -65,41 +113,38 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
                 left: `${particle.left}%`,
                 top: `${particle.top}%`,
                 animationDelay: `${particle.delay}s`,
-                animationDuration: `${particle.duration}s`
+                animationDuration: `${particle.duration}s`,
               }}
             />
           ))}
         </div>
       </div>
 
-      {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div 
+          <div
             className={`inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 transition-all duration-1000 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
             <span className="w-2 h-2 bg-[#10b981] rounded-full animate-pulse" />
-            <span className="text-sm text-gray-400">Profesyonel Hukuk Danışmanlığı</span>
+            <span className="text-sm text-gray-400">{t("badge")}</span>
           </div>
 
-          {/* Title */}
-          <h1 
+          <h1
             className={`text-5xl md:text-6xl lg:text-7xl font-serif text-white leading-[1.1] tracking-tight transition-all duration-1000 delay-200 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            Hukuki Çözümleriniz İçin
+            {t("title1")}
             <br />
             <span className="text-[#10b981] relative">
-              Güvenilir Partner
+              {t("title2")}
               <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
-                <path 
-                  d="M2 10C50 4 150 4 298 10" 
-                  stroke="#10b981" 
-                  strokeWidth="3" 
+                <path
+                  d="M2 10C50 4 150 4 298 10"
+                  stroke="#10b981"
+                  strokeWidth="3"
                   strokeLinecap="round"
                   className="animate-draw"
                 />
@@ -107,27 +152,24 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
             </span>
           </h1>
 
-          {/* Description */}
-          <p 
+          <p
             className={`mt-8 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-400 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            Ticaret, şirketler, aile, miras ve iş hukuku alanlarında 10+ yıllık deneyim ile 
-            stratejik ve sonuç odaklı hukuki danışmanlık hizmeti sunuyoruz.
+            {t("desc")}
           </p>
 
-          {/* CTA Buttons */}
-          <div 
+          <div
             className={`mt-12 flex flex-wrap justify-center gap-4 transition-all duration-1000 delay-500 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             <Link
               href="/iletisim"
               className="group px-8 py-4 bg-[#10b981] text-white text-sm font-medium hover:bg-[#059669] transition-all duration-300 flex items-center gap-2"
             >
-              <span>Ücretsiz Danışmanlık</span>
+              <span>{t("ctaFree")}</span>
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -136,37 +178,35 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
               href="/calisma-alanlari"
               className="px-8 py-4 border border-white/20 text-white text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300"
             >
-              Hizmetlerimizi İncele
+              {t("ctaServices")}
             </Link>
           </div>
 
-          {/* Stats */}
-          <div 
+          <div
             className={`mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 transition-all duration-1000 delay-700 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             {[
-              { value: "10+", label: "Yıllık Deneyim" },
-              { value: "500+", label: "Başarılı Dava" },
-              { value: "10", label: "Uzmanlık Alanı" },
-              { value: "%95", label: "Müvekkil Memnuniyeti" }
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
+              { value: "10+", key: "stat1" },
+              { value: "500+", key: "stat2" },
+              { value: "10", key: "stat3" },
+              { value: "%95", key: "stat4" },
+            ].map((stat) => (
+              <div key={stat.key} className="text-center">
                 <div className="text-3xl md:text-4xl font-serif text-white">{stat.value}</div>
-                <div className="text-sm text-gray-500 mt-1">{stat.label}</div>
+                <div className="text-sm text-gray-500 mt-1">{t(stat.key)}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Phone CTA */}
-        <div 
+        <div
           className={`mt-16 flex justify-center transition-all duration-1000 delay-900 ${
-            isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <a 
+          <a
             href={`tel:${phone.replace(/\s/g, "")}`}
             className="inline-flex items-center gap-4 px-6 py-4 bg-white/5 border border-white/10 hover:bg-white/10 transition-all group"
           >
@@ -176,14 +216,13 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
               </svg>
             </div>
             <div className="text-left">
-              <div className="text-xs text-gray-500 uppercase tracking-wider">7/24 Bizi Arayın</div>
+              <div className="text-xs text-gray-500 uppercase tracking-wider">{t("phoneLabel")}</div>
               <div className="text-lg font-medium text-white">{phone}</div>
             </div>
           </a>
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />

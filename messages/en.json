@@ -1,0 +1,263 @@
+{
+  "nav": {
+    "lawFirm": "Law Office",
+    "home": "Home",
+    "about": "About",
+    "practiceAreas": "Practice Areas",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "bookAppointment": "Book Appointment",
+    "menuAria": "Menu"
+  },
+  "footer": {
+    "lawFirm": "Law Office",
+    "services": "Our Services",
+    "pages": "Pages",
+    "legal": "Legal",
+    "contact": "Contact",
+    "allRights": "All rights reserved.",
+    "disclaimer": "This site is for informational purposes only.",
+    "allServices": "All Services →",
+    "about": "About",
+    "servicesLink": "Our Services",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "terms": "Terms of Use",
+    "cookie": "Cookie Policy",
+    "aydinlatma": "Privacy Notice",
+    "ticaretHukuku": "Commercial Law",
+    "sirketlerHukuku": "Corporate Law",
+    "aileHukuku": "Family Law",
+    "mirasHukuku": "Inheritance Law",
+    "isHukuku": "Labor Law"
+  },
+  "hero": {
+    "badge": "Professional Legal Consulting",
+    "title1": "Your Legal Solutions",
+    "title2": "Trusted Partner",
+    "desc": "With 10+ years of experience in commercial, corporate, family, inheritance and labor law, we provide strategic and results-oriented legal consulting.",
+    "ctaFree": "Free Consultation",
+    "ctaServices": "View Our Services",
+    "stat1": "Years of Experience",
+    "stat2": "Successful Cases",
+    "stat3": "Practice Areas",
+    "stat4": "Client Satisfaction",
+    "phoneLabel": "Call Us 24/7"
+  },
+  "home": {
+    "practiceAreaLabel": "Practice Areas",
+    "seeAll": "View All Services",
+    "aboutLabel": "About",
+    "moreInfo": "Learn More",
+    "yearsExp": "Years of Experience",
+    "blogLabel": "Blog",
+    "latestPosts": "Latest Posts",
+    "seeAllPosts": "View All",
+    "allPosts": "All Posts",
+    "detail": "Details",
+    "ctaTitle": "Contact Us for Legal",
+    "ctaTitleHighlight": "Consultation",
+    "ctaDesc": "Your first consultation is free. We listen to your legal issues and determine the best path forward for you.",
+    "ctaContact": "Get in Touch",
+    "ctaCall": "Call Us"
+  },
+  "about": {
+    "title": "About",
+    "contact": "Contact",
+    "bookAppointment": "Book Appointment",
+    "education": "Education",
+    "certifications": "Certifications",
+    "values": "Our Values",
+    "ctaTitle": "Consultation",
+    "ctaTitleHighlight": "Contact Us",
+    "ctaDesc": "Your first consultation is free.",
+    "ctaContact": "Get in Touch"
+  },
+  "contact": {
+    "title": "Contact",
+    "reachUs": "Contact Us for Legal Consultation",
+    "firstFree": "Your first consultation is free.",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "hours": "Working Hours",
+    "emergency": "Emergency?",
+    "emergencyDesc": "Available 24/7 for detention or arrest matters.",
+    "callNow": "Call Now",
+    "formTitle": "Contact Form",
+    "formDesc": "We will get back to you as soon as possible.",
+    "location": "Location",
+    "locationTitle": "Eskişehir Courthouse",
+    "locationSub": "The courthouse where our office is located",
+    "openInMaps": "Open in Google Maps"
+  },
+  "contactForm": {
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "subject": "Subject",
+    "message": "Your Message",
+    "select": "Select",
+    "other": "Other",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "example@email.com",
+    "phonePlaceholder": "+90 5XX XXX XX XX",
+    "messagePlaceholder": "Your message...",
+    "required": "Required fields",
+    "kvkk1": "I have read and understood the",
+    "aydinlatmaLink": "privacy notice",
+    "kvkk1End": "regarding the personal data provided through this contact form. *",
+    "kvkk2": "By submitting this form, I give my explicit consent for the processing of my personal data as set out in the privacy notice. *",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "successTitle": "Message Received",
+    "successDesc": "We will get back to you as soon as possible.",
+    "newMessage": "Send new message",
+    "errorGeneric": "An error occurred. Please try again.",
+    "errorConnection": "Connection error. Please check your internet connection."
+  },
+  "blog": {
+    "title": "Blog",
+    "legalPosts": "Legal Articles",
+    "sub": "Current information and useful content.",
+    "backTo": "Blog"
+  },
+  "blogPost": {
+    "backTo": "Blog",
+    "otherPosts": "Other Articles",
+    "attorney": "Attorney",
+    "share": "Share",
+    "toc": "Table of Contents",
+    "loading": "Loading content...",
+    "ctaTitle": "Consultation",
+    "ctaTitleHighlight": "Contact Us",
+    "ctaContact": "Get in Touch"
+  },
+  "practiceAreas": {
+    "label": "Practice Areas",
+    "intro": {
+      "title": "Our Services",
+      "description": "Our office provides solutions to legal disputes with a strategic, meticulous, and results-oriented approach. Each case is handled considering the specific characteristics of the matter and current judicial practices; we provide effective and reliable legal support to our clients."
+    },
+    "areas": {
+      "ticaretHukuku": {
+        "title": "Commercial Law",
+        "shortDescription": "Legal consulting in company formations, commercial contracts, unfair competition, and commercial receivables cases.",
+        "description": "We provide legal consulting and litigation services in company formations, preparation and amendment of articles of association, partnership disputes, share transfers, commercial contracts, unfair competition, commercial receivables and compensation cases, and all disputes of a commercial nature.",
+        "services": ["Company Formations", "Preparation and Amendment of Articles of Association", "Partnership Disputes", "Share Transfers", "Commercial Contracts", "Unfair Competition Cases", "Commercial Receivables Cases", "Compensation Cases"]
+      },
+      "sirketlerHukuku": {
+        "title": "Corporate Law",
+        "shortDescription": "Capital transactions, share transfers, general assembly processes, and corporate structuring support.",
+        "description": "We provide legal support regarding capital increase and decrease, share transfer transactions, general assembly and board of directors processes, internal company disputes, and corporate structuring.",
+        "services": ["Capital Increase and Decrease", "Share Transfer Transactions", "General Assembly Processes", "Board of Directors Processes", "Internal Company Disputes", "Corporate Structuring"]
+      },
+      "sozlesmelerHukuku": {
+        "title": "Contract Law",
+        "shortDescription": "Preparation, review, and dispute resolution of commercial and ordinary contracts.",
+        "description": "We provide legal support for the preparation, review, and revision of all types of commercial and ordinary contracts, as well as resolution of disputes arising from contracts.",
+        "services": ["Contract Preparation", "Contract Review", "Contract Revision", "Contract Disputes", "Commercial Contracts", "Ordinary Contracts"]
+      },
+      "aileHukuku": {
+        "title": "Family Law",
+        "shortDescription": "Meticulous and client-focused representation in divorce, alimony, custody, and property regime liquidation.",
+        "description": "We adopt a meticulous and client-focused representation approach in divorce cases, alimony, custody, establishment of personal relationships, liquidation of property regime, and all disputes arising from family law.",
+        "services": ["Divorce Cases", "Alimony Cases", "Custody Cases", "Establishment of Personal Relationships", "Property Regime Liquidation", "Consensual Divorce", "Contested Divorce"]
+      },
+      "mirasHukuku": {
+        "title": "Inheritance Law",
+        "shortDescription": "Effective services in inheritance distribution, inheritance certificate, reduction, and fraudulent conveyance cases.",
+        "description": "We provide effective legal services in inheritance distribution, inheritance certificates, inheritance contracts, reduction cases, cases based on fraudulent conveyance, and disputes arising from inheritance law.",
+        "services": ["Inheritance Distribution", "Inheritance Certificate", "Inheritance Contracts", "Reduction Cases", "Fraudulent Conveyance Cases", "Inheritance Renunciation"]
+      },
+      "borclarHukuku": {
+        "title": "Law of Obligations",
+        "shortDescription": "Support in tort, unjust enrichment, and breach of contract disputes.",
+        "description": "We provide legal support in disputes arising from tort, unjust enrichment, breach of contract, and debt relationships.",
+        "services": ["Tort Cases", "Unjust Enrichment", "Breach of Contract", "Compensation Cases", "Receivables Cases"]
+      },
+      "icraIflasHukuku": {
+        "title": "Enforcement and Bankruptcy Law",
+        "shortDescription": "Execution of enforcement proceedings, attachment procedures, negative determination, and recovery cases.",
+        "description": "We handle enforcement proceedings with and without judgments, attachment procedures, objections and complaints, negative determination and recovery cases, and disputes arising from enforcement law.",
+        "services": ["Enforcement Without Judgment", "Enforcement With Judgment", "Attachment Procedures", "Objections and Complaints", "Negative Determination Cases", "Recovery Cases"]
+      },
+      "gayrimenkulKiraHukuku": {
+        "title": "Real Estate and Lease Law",
+        "shortDescription": "Real estate transactions, lease disputes, eviction, and title deed cases.",
+        "description": "We provide legal support in real estate purchase and sale transactions, lease disputes, eviction cases, title deed cancellation and registration cases, and disputes regarding property rights.",
+        "services": ["Real Estate Purchase and Sale", "Lease Disputes", "Eviction Cases", "Title Deed Cancellation Cases", "Registration Cases", "Property Rights"]
+      },
+      "isHukuku": {
+        "title": "Labor Law",
+        "shortDescription": "Employee-employer disputes, reinstatement, compensation, and employment contract consulting.",
+        "description": "We provide legal consulting regarding disputes arising from employee and employer relationships, reinstatement cases, severance and notice compensation, preparation of employment contracts, and termination processes.",
+        "services": ["Reinstatement Cases", "Severance Compensation", "Notice Compensation", "Employment Contracts", "Termination Processes", "Employee-Employer Disputes"]
+      },
+      "hukukiDanismanlik": {
+        "title": "Legal Consulting",
+        "shortDescription": "Risk analysis and process management services for individual and corporate clients.",
+        "description": "We provide regular legal consulting services to individual and corporate clients, including risk analysis before disputes arise, legal opinion formation, and process management.",
+        "services": ["Risk Analysis", "Legal Opinion Formation", "Process Management", "Corporate Consulting", "Individual Consulting", "Regular Legal Support"]
+      }
+    },
+    "ctaTitle": "Which Area Do You",
+    "ctaTitleHighlight": "Need Help With?",
+    "ctaDesc": "Let's find the right solution for you together.",
+    "ctaButton": "Free Consultation",
+    "backTo": "Our Services",
+    "ourServices": "Services We Offer",
+    "ourProcess": "Our Process",
+    "step1": "Initial Assessment",
+    "step1Desc": "We listen to your legal situation and evaluate the specifics of your case.",
+    "step2": "Strategy",
+    "step2Desc": "We define the most suitable legal strategy in light of current case law.",
+    "step3": "Process Management",
+    "step3Desc": "We diligently follow your case and keep you informed at every stage.",
+    "step4": "Results-Oriented Follow-up",
+    "step4Desc": "We stand by you with determination until we achieve your goals.",
+    "freeConsult": "Free Initial Consultation",
+    "freeConsultDesc": "Contact us for legal support in",
+    "otherServices": "Other Services",
+    "seeAll": "View All",
+    "ctaSupport": "Get",
+    "ctaSupportHighlight": "Support",
+    "ctaSupportFor": " for ",
+    "ctaSupportDesc": "We provide professional solutions for your legal issues.",
+    "ctaContact": "Get in Touch",
+    "bookAppointment": "Book Appointment"
+  },
+  "faq": {
+    "label": "FAQ",
+    "title": "Frequently Asked Questions",
+    "sub": "Answers to your questions.",
+    "ctaTitle": "Didn't Find Your Answer?",
+    "ctaDesc": "You can get in touch with us.",
+    "ctaContact": "Get in Touch",
+    "ctaCall": "Call Us"
+  },
+  "legal": {
+    "kvkk": "GDPR",
+    "legal": "Legal",
+    "aydinlatma": "Privacy Notice",
+    "aydinlatmaSub": "Regarding Personal Data Collected Through Our Contact Form",
+    "cerez": "Cookie Policy",
+    "kullanim": "Terms of Use",
+    "enOnlyNotice": "This page is currently available in Turkish. For an English version, please contact us."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "desc": "The page you are looking for does not exist or may have been moved.",
+    "home": "Back to Home",
+    "contact": "Contact Us"
+  },
+  "loading": {
+    "text": "Loading..."
+  },
+  "lang": {
+    "tr": "Türkçe",
+    "en": "English",
+    "aria": "Select language"
+  }
+}
