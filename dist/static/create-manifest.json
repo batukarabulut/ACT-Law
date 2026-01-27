@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "createdAt": "2026-01-27T20:59:33.870Z",
+  "workspaces": [
+    {
+      "name": "ahmet-can-tonus-hukuk",
+      "title": "Ahmet Can Tonus Hukuk Bürosu",
+      "basePath": "/",
+      "projectId": "a81gtm88",
+      "dataset": "production",
+      "icon": null,
+      "mediaLibrary": {
+        "enabled": false
+      },
+      "schema": "6a949117.create-schema.json",
+      "tools": "4277de03.create-tools.json"
+    }
+  ],
+  "studioVersion": "5.5.0"
+}

@@ -13,7 +13,8 @@ export default defineConfig({
   projectId,
   dataset,
   
-  basePath: "/studio",
+  // basePath kaldırıldı - Studio artık Sanity'nin hosted Studio'sunda çalışacak
+  // Studio'ya erişim: https://ahmet-can-tonus-hukuk.sanity.studio
   
   plugins: [
     structureTool(),
