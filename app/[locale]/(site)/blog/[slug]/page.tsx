@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { getBlogPosts, getBlogPostBySlug, getSiteConfig } from "@/sanity/lib/fetch";
 import BlogPostContent from "@/components/BlogPostContent";
+import SanityImage from "@/components/SanityImage";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -59,23 +60,41 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
-      <section className="py-24 lg:py-40 bg-[#1c1c1c]">
+      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#10b981] mb-8">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#10b981] mb-8 transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             {t("backTo")}
           </Link>
-          <div className="text-xs text-[#10b981] uppercase tracking-wider mb-6">
+          <div className="text-xs text-[#10b981] uppercase tracking-[0.15em] mb-4">
             {post.category} • {post.readTime}
           </div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white leading-tight">
+          <div className="w-12 h-px bg-[#10b981]/60 mb-6" aria-hidden="true" />
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white leading-tight tracking-tight">
             {post.title}
           </h1>
           <p className="mt-8 text-lg text-gray-400">{post.excerpt}</p>
         </div>
       </section>
+
+      {(post as { mainImage?: unknown }).mainImage && (
+        <section className="bg-[#1a1a1a]">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="aspect-[21/9] relative overflow-hidden -mb-px">
+              <SanityImage
+                image={(post as { mainImage?: unknown }).mainImage}
+                alt={post.title}
+                preset="blogHero"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 896px"
+              />
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,7 +125,16 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="grid md:grid-cols-3 gap-6">
             {otherPosts.map((p) => (
               <Link key={p.slug} href={`/blog/${p.slug}`} className="group">
-                <div className="aspect-[16/10] bg-gray-200 mb-4 group-hover:scale-[1.02] transition-transform" />
+                <div className="aspect-[16/10] bg-gray-200 mb-4 relative overflow-hidden group-hover:scale-[1.02] transition-transform">
+                  <SanityImage
+                    image={(p as { mainImage?: unknown }).mainImage}
+                    alt={p.title}
+                    preset="blogCard"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
                 <p className="text-xs text-[#10b981] mb-1">{p.category}</p>
                 <h3 className="font-serif text-[#111] group-hover:text-gray-600 line-clamp-2">{p.title}</h3>
               </Link>

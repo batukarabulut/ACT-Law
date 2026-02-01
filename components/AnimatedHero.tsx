@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 
 interface AnimatedHeroProps {
   phone: string;
+  /** Hero paragrafı (Sanity'den). Verilmezse çeviri dosyasındaki varsayılan metin kullanılır. */
+  heroDesc?: string | null;
 }
 
 const particlePositions = [
@@ -31,7 +33,7 @@ const particlePositions = [
   { left: 8, top: 88, delay: 3.1, duration: 10 },
 ];
 
-export default function AnimatedHero({ phone }: AnimatedHeroProps) {
+export default function AnimatedHero({ phone, heroDesc }: AnimatedHeroProps) {
   const t = useTranslations("hero");
   const [isLoaded, setIsLoaded] = useState(false);
   const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
@@ -72,7 +74,7 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="min-h-[calc(100vh-5rem)] bg-[#1e1e1e] relative overflow-hidden flex items-center"
+      className="min-h-screen -mt-20 pt-20 pb-12 bg-[#1e1e1e] relative overflow-hidden flex items-start justify-center"
     >
       <div className="absolute inset-0">
         <div
@@ -120,10 +122,10 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 pb-16 -translate-y-6">
         <div className="max-w-4xl mx-auto text-center">
           <div
-            className={`inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 transition-all duration-1000 ${
+            className={`inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-5 transition-all duration-1000 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
@@ -153,15 +155,15 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
           </h1>
 
           <p
-            className={`mt-8 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-400 ${
+            className={`mt-5 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-400 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            {t("desc")}
+            {heroDesc ?? t("desc")}
           </p>
 
           <div
-            className={`mt-12 flex flex-wrap justify-center gap-4 transition-all duration-1000 delay-500 ${
+            className={`mt-8 flex flex-wrap justify-center gap-4 transition-all duration-1000 delay-500 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -169,7 +171,7 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
               href="/iletisim"
               className="group px-8 py-4 bg-[#10b981] text-white text-sm font-medium hover:bg-[#059669] transition-all duration-300 flex items-center gap-2"
             >
-              <span>{t("ctaFree")}</span>
+              <span>{t("ctaContact")}</span>
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -183,15 +185,15 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
           </div>
 
           <div
-            className={`mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 transition-all duration-1000 delay-700 ${
+            className={`mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 transition-all duration-1000 delay-700 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             {[
               { value: "10+", key: "stat1" },
               { value: "500+", key: "stat2" },
-              { value: "10", key: "stat3" },
-              { value: "%95", key: "stat4" },
+              { value: "10+", key: "stat3" },
+              { value: "%100", key: "stat4" },
             ].map((stat) => (
               <div key={stat.key} className="text-center">
                 <div className="text-3xl md:text-4xl font-serif text-white">{stat.value}</div>
@@ -202,7 +204,7 @@ export default function AnimatedHero({ phone }: AnimatedHeroProps) {
         </div>
 
         <div
-          className={`mt-16 flex justify-center transition-all duration-1000 delay-900 ${
+          className={`mt-28 flex justify-center transition-all duration-1000 delay-900 ${
             isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >

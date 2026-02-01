@@ -1,7 +1,7 @@
 import { Link } from "@/i18n/navigation";
-import Image from "next/image";
 import { getSiteConfig, getPracticeAreas, getPracticeAreasIntro, getBlogPosts, getAboutContent } from "@/sanity/lib/fetch";
 import AnimatedHero from "@/components/AnimatedHero";
+import SanityImage from "@/components/SanityImage";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 
@@ -24,7 +24,7 @@ export default async function Home({ params }: Props) {
 
   return (
     <>
-      <AnimatedHero phone={siteConfig.phone} />
+      <AnimatedHero phone={siteConfig.phone} heroDesc={siteConfig.heroDescription} />
 
       <section className="py-20 lg:py-28 bg-[#f7f7f7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -90,16 +90,17 @@ export default async function Home({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative order-2 lg:order-1">
-              <div className="aspect-square bg-[#f2f2f2] max-w-md relative overflow-hidden border border-gray-200/90">
-                <Image
-                  src="/avukat.jpg"
+              <div className="aspect-square bg-[#fafafa] max-w-md relative overflow-hidden">
+                <SanityImage
+                  image={aboutContent.image}
                   alt={aboutContent.name || ""}
+                  preset="about"
                   fill
+                  fallbackSrc="/avukat.jpg"
                   className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 448px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/[0.03] to-transparent" />
               </div>
-              <div className="absolute top-6 left-6 w-full h-full border border-[#10b981]/25 -z-10 max-w-md" />
               <div className="absolute -bottom-4 -right-4 bg-[#10b981] text-white p-6">
                 <div className="text-3xl font-serif font-semibold">10+</div>
                 <div className="text-sm text-white/70 mt-1">{t("yearsExp")}</div>
@@ -168,12 +169,15 @@ export default async function Home({ params }: Props) {
             {blogPosts.slice(0, 3).map((post) => (
               <article key={post.slug} className="group">
                 <Link href={`/blog/${post.slug}`}>
-                  <div className="aspect-[16/10] bg-[#2a2a2a] mb-5 overflow-hidden border border-white/10 group-hover:border-[#10b981]/30 transition-colors">
-                    <div className="w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#383838] group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
-                      <svg className="w-12 h-12 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                      </svg>
-                    </div>
+                  <div className="aspect-[16/10] bg-[#2a2a2a] mb-5 overflow-hidden border border-white/10 group-hover:border-[#10b981]/30 transition-colors relative">
+                    <SanityImage
+                      image={(post as { mainImage?: unknown }).mainImage}
+                      alt={post.title}
+                      preset="blogCard"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
                   </div>
                   <div className="text-xs text-[#10b981] uppercase tracking-wider mb-2">
                     {post.category} • {post.readTime}
@@ -211,9 +215,6 @@ export default async function Home({ params }: Props) {
             {t("ctaTitle")}
             <span className="text-[#10b981]"> {t("ctaTitleHighlight")}</span>
           </h2>
-          <p className="mt-6 text-gray-400 max-w-lg mx-auto">
-            {t("ctaDesc")}
-          </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
               href="/iletisim"

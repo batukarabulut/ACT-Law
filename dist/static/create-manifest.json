@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "createdAt": "2026-01-27T20:59:33.870Z",
+  "createdAt": "2026-02-01T16:43:02.187Z",
   "workspaces": [
     {
       "name": "ahmet-can-tonus-hukuk",
@@ -12,7 +12,7 @@
       "mediaLibrary": {
         "enabled": false
       },
-      "schema": "6a949117.create-schema.json",
+      "schema": "30ae6f62.create-schema.json",
       "tools": "4277de03.create-tools.json"
     }
   ],

@@ -6,6 +6,13 @@ export const siteConfig = defineType({
   type: "document",
   fields: [
     defineField({
+      name: "logo",
+      title: "Navbar Logo",
+      type: "image",
+      description: "Navbar’da görünecek logo (tercihen şeffaf arka planlı). Yüklemezseniz metin logosu kullanılır.",
+      options: { hotspot: true },
+    }),
+    defineField({
       name: "name",
       title: "Avukat Adı",
       type: "string",
@@ -22,6 +29,16 @@ export const siteConfig = defineType({
       title: "Site Açıklaması",
       type: "text",
       rows: 2,
+    }),
+    defineField({
+      name: "heroDescription",
+      title: "Hero Açıklaması",
+      type: "object",
+      description: "Ana sayfa hero bölümündeki paragraf (Türkçe / İngilizce). Boş bırakırsanız varsayılan metin kullanılır.",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "text", rows: 3 },
+        { name: "en", title: "English", type: "text", rows: 3 },
+      ],
     }),
     defineField({
       name: "phone",

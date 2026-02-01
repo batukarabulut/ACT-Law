@@ -9,6 +9,7 @@ import {
   aboutContentQuery,
   practiceAreasIntroQuery,
   legalContentQuery,
+  teamMembersQuery,
 } from "./queries";
 import {
   siteConfig as staticSiteConfig,
@@ -17,6 +18,7 @@ import {
   blogPosts as staticBlogPosts,
   faqItems as staticFaqItems,
   aboutContent as staticAboutContent,
+  teamMembers as staticTeamMembers,
 } from "@/lib/data";
 
 // Sanity yapılandırılmış mı kontrol et
@@ -29,6 +31,7 @@ export type PracticeAreasIntro = typeof staticPracticeAreasIntro;
 export type BlogPost = (typeof staticBlogPosts)[number];
 export type FaqItem = (typeof staticFaqItems)[number];
 export type AboutContent = typeof staticAboutContent;
+export type TeamMember = (typeof staticTeamMembers)[number];
 export type LegalContent = {
   termsOfUse?: any[];
   termsOfUseWarning?: string | null;
@@ -136,6 +139,18 @@ export async function getAboutContent(locale: string = "tr"): Promise<AboutConte
     return data || staticAboutContent;
   } catch {
     return staticAboutContent;
+  }
+}
+
+// Ekibimiz
+export async function getTeamMembers(locale: string = "tr"): Promise<TeamMember[]> {
+  if (!isSanityConfigured) return staticTeamMembers;
+  
+  try {
+    const data = await client.fetch(teamMembersQuery, { locale }, fetchOptions);
+    return data?.length ? data : staticTeamMembers;
+  } catch {
+    return staticTeamMembers;
   }
 }
 

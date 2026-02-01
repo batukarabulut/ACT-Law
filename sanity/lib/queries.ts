@@ -1,11 +1,25 @@
 import { groq } from "next-sanity";
 
+// Ekibimiz (team members)
+export const teamMembersQuery = groq`
+  *[_type == "teamMember"] | order(order asc) {
+    _id,
+    "name": coalesce(name[$locale], name.tr, name.en, name),
+    "title": coalesce(title[$locale], title.tr, title.en, title),
+    image,
+    "shortDescription": coalesce(shortDescription[$locale], shortDescription.tr, shortDescription.en, shortDescription),
+    linkToAbout
+  }
+`;
+
 // Site Ayarları (workingHours locale'e göre değişir)
 export const siteConfigQuery = groq`
   *[_type == "siteConfig"][0] {
+    logo,
     name,
     title,
     description,
+    "heroDescription": coalesce(heroDescription[$locale], heroDescription.tr, heroDescription.en),
     phone,
     email,
     address,
@@ -19,6 +33,7 @@ export const practiceAreasQuery = groq`
     _id,
     "title": coalesce(title[$locale], title.tr, title.en, title),
     "slug": slug.current,
+    image,
     "shortDescription": coalesce(shortDescription[$locale], shortDescription.tr, shortDescription.en, shortDescription),
     "description": coalesce(description[$locale], description.tr, description.en, description),
     "services": coalesce(services[$locale], services.tr, services.en, services)
@@ -31,6 +46,7 @@ export const practiceAreaBySlugQuery = groq`
     _id,
     "title": coalesce(title[$locale], title.tr, title.en, title),
     "slug": slug.current,
+    image,
     "shortDescription": coalesce(shortDescription[$locale], shortDescription.tr, shortDescription.en, shortDescription),
     "description": coalesce(description[$locale], description.tr, description.en, description),
     "services": coalesce(services[$locale], services.tr, services.en, services)

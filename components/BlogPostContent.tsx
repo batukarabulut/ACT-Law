@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { useTranslations } from "next-intl";
+import { urlForOptimized, IMAGE_PRESETS } from "@/sanity/lib/image";
 
 interface Heading {
   id: string;
@@ -122,6 +124,27 @@ const portableTextComponents: PortableTextComponents = {
         {children}
       </a>
     ),
+  },
+  types: {
+    image: ({ value }) => {
+      const url = value?.asset?._ref
+        ? urlForOptimized(value, IMAGE_PRESETS.contentInline)
+        : null;
+      const alt = (value?.caption as string) || "";
+      if (!url) return null;
+      return (
+        <span className="my-6 block overflow-hidden rounded-lg">
+          <Image
+            src={url}
+            alt={alt}
+            width={900}
+            height={500}
+            className="w-full h-auto object-cover"
+            sizes="(max-width: 900px) 100vw, 900px"
+          />
+        </span>
+      );
+    },
   },
 };
 

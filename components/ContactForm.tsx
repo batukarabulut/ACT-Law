@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 
 type PracticeArea = { slug: string; title: string };
 
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "YOUR_FORM_ID";
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
 export default function ContactForm({ practiceAreas }: { practiceAreas: PracticeArea[] }) {
   const t = useTranslations("contactForm");

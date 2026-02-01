@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { getPracticeAreas, getPracticeAreaBySlug, getSiteConfig } from "@/sanity/lib/fetch";
+import SanityImage from "@/components/SanityImage";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -67,9 +68,9 @@ export default async function PracticeAreaDetailPage({ params }: Props) {
 
   return (
     <>
-      <section className="py-16 lg:py-24 bg-[#1c1c1c]">
+      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/calisma-alanlari" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#10b981] mb-8">
+          <Link href="/calisma-alanlari" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#10b981] mb-8 transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -90,6 +91,18 @@ export default async function PracticeAreaDetailPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
             <div className="lg:col-span-2">
+              {(area as { image?: unknown }).image && (
+                <div className="aspect-[21/9] max-w-2xl mb-12 rounded-lg overflow-hidden bg-gray-100 relative">
+                  <SanityImage
+                    image={(area as { image?: unknown }).image}
+                    alt={title}
+                    preset="practiceHero"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 66vw"
+                  />
+                </div>
+              )}
               <p className="text-gray-600 leading-relaxed text-lg mb-12">{description}</p>
 
               <h2 className="text-2xl font-serif text-[#111] mb-8">{t("ourServices")}</h2>

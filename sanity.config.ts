@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./sanity/schemas";
+import { structure } from "./sanity/structure";
 
 // Sanity Project ID ve Dataset
 const projectId = "a81gtm88";
@@ -17,7 +18,7 @@ export default defineConfig({
   // Studio'ya erişim: https://ahmet-can-tonus-hukuk.sanity.studio
   
   plugins: [
-    structureTool(),
+    structureTool({ structure }),
   ],
   
   schema: {

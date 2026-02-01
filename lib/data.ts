@@ -1,7 +1,9 @@
 export const siteConfig = {
+  logo: undefined as { _type: string; asset?: { _ref: string } } | undefined,
   name: "Av. Ahmet Can Tonus",
-  title: "CT & Partners Hukuk Bürosu",
+  title: "ACT | Law & Consulting",
   description: "CT & Partners Hukuk Bürosu resmi web sitesidir.",
+  heroDescription: undefined as string | undefined,
   phone: "0541 332 35 95",
   email: "info@ctpartners.av.tr",
   address: "Gökmeydan Mh. Nilgün Sk. Uzun Ap. 122/10 Odunpazarı/Eskişehir",
@@ -272,8 +274,8 @@ Binanın esaslı onarımı veya yeniden inşası gerektiğinde tahliye talep edi
 
 export const faqItems = [
   {
-    question: "İlk görüşme ücretli midir?",
-    answer: "İlk tanışma görüşmemiz ücretsizdir. Bu görüşmede hukuki sorununuzu dinler ve size yol haritası çıkarırız. Devam eden süreçler için ücretlendirme hakkında şeffaf bilgilendirme yapılır."
+    question: "İlk görüşme nasıl yapılır?",
+    answer: "İlk görüşmede hukuki sorununuzu dinler ve size yol haritası çıkarırız. Ücretlendirme hakkında şeffaf bilgilendirme yapılır."
   },
   {
     question: "Hangi alanlarda hizmet veriyorsunuz?",
@@ -305,9 +307,21 @@ export const faqItems = [
   }
 ];
 
+export const teamMembers = [
+  {
+    _id: "fallback-1",
+    name: "Av. Ahmet Can Tonus",
+    title: "Avukat",
+    image: undefined as { _type: string; asset?: { _ref: string } } | undefined,
+    shortDescription: "10+ yıllık deneyimiyle ticaret hukuku, şirketler hukuku ve sözleşmeler hukuku alanlarında uzman. Müvekkillerine güvenilir ve sonuç odaklı hukuki danışmanlık sunmaktadır.",
+    linkToAbout: true,
+  },
+];
+
 export const aboutContent = {
   name: "Ahmet Can Tonus",
   title: "Avukat",
+  image: undefined as { _type: string; asset: { _ref: string } } | undefined,
   bio: `Ahmet Can Tonus, İstanbul Üniversitesi Hukuk Fakültesi'nden 2015 yılında mezun olmuştur. Mezuniyetinin ardından Eskişehir Barosu'na kayıt yaptırarak avukatlık mesleğine başlamıştır.
 
 10 yılı aşkın mesleki deneyimiyle özellikle ticaret hukuku, şirketler hukuku ve sözleşmeler hukuku alanlarında uzmanlaşmıştır. Müvekkillerine güvenilir, şeffaf ve sonuç odaklı hukuki danışmanlık sunmayı ilke edinmiştir.

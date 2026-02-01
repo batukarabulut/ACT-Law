@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
-import Image from "next/image";
 import { getAboutContent, getSiteConfig } from "@/sanity/lib/fetch";
+import SanityImage from "@/components/SanityImage";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 
@@ -26,12 +26,13 @@ export default async function AboutPage({ params }: Props) {
 
   return (
     <>
-      <section className="py-16 lg:py-24 bg-[#1c1c1c]">
+      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-[11px] tracking-wider uppercase text-[#10b981] mb-3">
+          <p className="text-[11px] tracking-[0.2em] uppercase text-[#10b981] mb-3">
             {t("title")}
           </p>
-          <h1 className="text-4xl md:text-5xl font-serif text-white">
+          <div className="w-12 h-px bg-[#10b981]/60 mb-6" aria-hidden="true" />
+          <h1 className="text-4xl md:text-5xl font-serif text-white tracking-tight">
             {aboutContent.name || ""}
           </h1>
           <p className="mt-2 text-xl text-gray-400 font-serif">
@@ -45,12 +46,15 @@ export default async function AboutPage({ params }: Props) {
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
             <div className="lg:col-span-1 order-2 lg:order-1">
               <div className="lg:sticky lg:top-28 space-y-8">
-                <div className="aspect-[3/4] bg-gray-100 relative overflow-hidden">
-                  <Image
-                    src="/avukat.jpg"
-                    alt="Av. Ahmet Can Tonus"
+                <div className="aspect-[3/4] bg-white relative overflow-hidden">
+                  <SanityImage
+                    image={aboutContent.image}
+                    alt={aboutContent.name ? `${aboutContent.name} - ${aboutContent.title || ""}`.trim() : "Av. Ahmet Can Tonus"}
+                    preset="about"
                     fill
+                    fallbackSrc="/avukat.jpg"
                     className="object-cover object-top"
+                    sizes="(max-width: 1024px) 100vw, 400px"
                   />
                 </div>
 
@@ -124,8 +128,7 @@ export default async function AboutPage({ params }: Props) {
       <section className="py-16 lg:py-20 bg-[#1e1e1e] text-white text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-serif">{t("ctaTitle")} <span className="text-[#10b981]">{t("ctaTitleHighlight")}</span></h2>
-          <p className="mt-4 text-gray-400">{t("ctaDesc")}</p>
-          <Link href="/iletisim" className="inline-block mt-8 px-8 py-4 bg-[#10b981] text-white text-sm font-medium hover:bg-[#059669] transition-colors">
+          <Link href="/iletisim" className="inline-block mt-6 px-8 py-4 bg-[#10b981] text-white text-sm font-medium hover:bg-[#059669] transition-colors">
             {t("ctaContact")}
           </Link>
         </div>

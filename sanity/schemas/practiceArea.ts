@@ -26,6 +26,15 @@ export const practiceArea = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "image",
+      title: "Görsel / Image",
+      type: "image",
+      description: "Bu çalışma alanı için kapak görseli. Liste ve detay sayfalarında kullanılır.",
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: "shortDescription",
       title: "Kısa Açıklama / Short Description",
       type: "object",
@@ -84,6 +93,7 @@ export const practiceArea = defineType({
     select: {
       title: "title.tr",
       subtitle: "title.en",
+      media: "image",
     },
   },
 });

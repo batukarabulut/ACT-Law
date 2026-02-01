@@ -28,10 +28,11 @@ export default async function ContactPage({ params }: Props) {
 
   return (
     <>
-      <section className="py-16 lg:py-24 bg-[#1c1c1c]">
+      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-[11px] tracking-wider uppercase text-[#10b981] mb-3">{t("title")}</p>
-          <h1 className="text-4xl md:text-5xl font-serif text-white">{t("reachUs")}</h1>
+          <p className="text-[11px] tracking-[0.2em] uppercase text-[#10b981] mb-3">{t("title")}</p>
+          <div className="w-12 h-px bg-[#10b981]/60 mb-6" aria-hidden="true" />
+          <h1 className="text-4xl md:text-5xl font-serif text-white tracking-tight">{t("reachUs")}</h1>
           <p className="mt-4 text-gray-400">{t("firstFree")}</p>
         </div>
       </section>
