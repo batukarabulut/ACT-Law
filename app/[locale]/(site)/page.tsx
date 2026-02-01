@@ -2,6 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { getSiteConfig, getPracticeAreas, getPracticeAreasIntro, getBlogPosts, getAboutContent } from "@/sanity/lib/fetch";
 import AnimatedHero from "@/components/AnimatedHero";
 import SanityImage from "@/components/SanityImage";
+import type { SanityImageSource } from "@/sanity/lib/image";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 
@@ -171,7 +172,7 @@ export default async function Home({ params }: Props) {
                 <Link href={`/blog/${post.slug}`}>
                   <div className="aspect-[16/10] bg-[#2a2a2a] mb-5 overflow-hidden border border-white/10 group-hover:border-[#10b981]/30 transition-colors relative">
                     <SanityImage
-                      image={(post as { mainImage?: unknown }).mainImage}
+                      image={(post as { mainImage?: SanityImageSource }).mainImage}
                       alt={post.title}
                       preset="blogCard"
                       fill

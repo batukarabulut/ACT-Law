@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import SanityImage from "@/components/SanityImage";
+import type { SanityImageSource } from "@/sanity/lib/image";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -43,7 +44,7 @@ export default async function BlogPage({ params }: Props) {
                 <Link href={`/blog/${post.slug}`}>
                   <div className="aspect-[16/10] bg-gray-100 mb-5 overflow-hidden relative">
                     <SanityImage
-                      image={(post as { mainImage?: unknown }).mainImage}
+                      image={(post as { mainImage?: SanityImageSource }).mainImage}
                       alt={post.title}
                       preset="blogCard"
                       fill

@@ -77,9 +77,10 @@ export default function SanityImage({
     );
   }
 
-  const presetDims = preset ? IMAGE_PRESETS[preset] : {};
-  const w = width ?? customOptions?.width ?? (presetDims && "width" in presetDims ? presetDims.width : undefined) ?? 800;
-  const h = height ?? customOptions?.height ?? 600;
+  const presetDims = preset ? IMAGE_PRESETS[preset] : null;
+  const presetWidth = presetDims && "width" in presetDims ? (presetDims as { width: number }).width : undefined;
+  const w: number = width ?? customOptions?.width ?? presetWidth ?? 800;
+  const h: number = height ?? customOptions?.height ?? 600;
 
   return (
     <Image

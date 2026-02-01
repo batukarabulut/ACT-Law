@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { getPracticeAreas, getPracticeAreasIntro } from "@/sanity/lib/fetch";
 import SanityImage from "@/components/SanityImage";
+import type { SanityImageSource } from "@/sanity/lib/image";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 
@@ -60,10 +61,10 @@ export default async function PracticeAreasPage({ params }: Props) {
                   href={`/calisma-alanlari/${area.slug}`}
                   className="group p-8 lg:p-10 bg-white hover:bg-[#1a1a1a] transition-all duration-300 flex gap-6"
                 >
-                  {(area as { image?: unknown }).image && (
+                  {(area as { image?: SanityImageSource }).image ? (
                     <div className="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 relative">
                       <SanityImage
-                        image={(area as { image?: unknown }).image}
+                        image={(area as { image?: SanityImageSource }).image}
                         alt={title}
                         preset="practiceCard"
                         fill
@@ -71,7 +72,7 @@ export default async function PracticeAreasPage({ params }: Props) {
                         sizes="96px"
                       />
                     </div>
-                  )}
+                  ) : null}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between">
                       <span className="text-[#10b981] text-sm font-medium">

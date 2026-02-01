@@ -28,7 +28,8 @@ export function urlForOptimized(
   if (options.width != null) img = img.width(options.width);
   if (options.height != null) img = img.height(options.height);
   if (options.quality != null) img = img.quality(options.quality);
-  if (options.format) img = img.format(options.format);
+  // @sanity/image-url ImageFormat tipi "avif" içermiyor; runtime'da desteklenir
+  if (options.format) img = img.format(options.format as Parameters<typeof img.format>[0]);
   if (options.fit) img = img.fit(options.fit);
   return img.url();
 }

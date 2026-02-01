@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { getBlogPosts, getBlogPostBySlug, getSiteConfig } from "@/sanity/lib/fetch";
 import BlogPostContent from "@/components/BlogPostContent";
 import SanityImage from "@/components/SanityImage";
+import type { SanityImageSource } from "@/sanity/lib/image";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -79,12 +80,12 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
-      {(post as { mainImage?: unknown }).mainImage && (
+      {(post as { mainImage?: SanityImageSource }).mainImage && (
         <section className="bg-[#1a1a1a]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="aspect-[21/9] relative overflow-hidden -mb-px">
               <SanityImage
-                image={(post as { mainImage?: unknown }).mainImage}
+                image={(post as { mainImage?: SanityImageSource }).mainImage}
                 alt={post.title}
                 preset="blogHero"
                 fill
@@ -127,7 +128,7 @@ export default async function BlogPostPage({ params }: Props) {
               <Link key={p.slug} href={`/blog/${p.slug}`} className="group">
                 <div className="aspect-[16/10] bg-gray-200 mb-4 relative overflow-hidden group-hover:scale-[1.02] transition-transform">
                   <SanityImage
-                    image={(p as { mainImage?: unknown }).mainImage}
+                    image={(p as { mainImage?: SanityImageSource }).mainImage}
                     alt={p.title}
                     preset="blogCard"
                     fill

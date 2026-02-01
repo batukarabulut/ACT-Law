@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { getPracticeAreas, getPracticeAreaBySlug, getSiteConfig } from "@/sanity/lib/fetch";
 import SanityImage from "@/components/SanityImage";
+import type { SanityImageSource } from "@/sanity/lib/image";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -91,10 +92,10 @@ export default async function PracticeAreaDetailPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
             <div className="lg:col-span-2">
-              {(area as { image?: unknown }).image && (
+              {(area as { image?: SanityImageSource }).image ? (
                 <div className="aspect-[21/9] max-w-2xl mb-12 rounded-lg overflow-hidden bg-gray-100 relative">
                   <SanityImage
-                    image={(area as { image?: unknown }).image}
+                    image={(area as { image?: SanityImageSource }).image}
                     alt={title}
                     preset="practiceHero"
                     fill
@@ -102,7 +103,7 @@ export default async function PracticeAreaDetailPage({ params }: Props) {
                     sizes="(max-width: 1024px) 100vw, 66vw"
                   />
                 </div>
-              )}
+              ) : null}
               <p className="text-gray-600 leading-relaxed text-lg mb-12">{description}</p>
 
               <h2 className="text-2xl font-serif text-[#111] mb-8">{t("ourServices")}</h2>
