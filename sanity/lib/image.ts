@@ -36,15 +36,15 @@ export function urlForOptimized(
 
 export const IMAGE_PRESETS = {
   /** Hakkımızda / profil fotoğrafı (kare, büyük) */
-  about: { width: 800, quality: 85, format: "webp" as const, fit: "max" as const },
+  about: { width: 1000, quality: 92, format: "webp" as const, fit: "max" as const },
   /** Blog kartı (liste) */
-  blogCard: { width: 600, quality: 75, format: "webp" as const, fit: "max" as const },
-  /** Blog detay kapak */
-  blogHero: { width: 1200, quality: 85, format: "webp" as const, fit: "max" as const },
+  blogCard: { width: 800, quality: 88, format: "webp" as const, fit: "max" as const },
+  /** Blog detay kapak (retina için 2x genişlik) */
+  blogHero: { width: 1920, quality: 92, format: "webp" as const, fit: "max" as const },
   /** Çalışma alanı kartı */
-  practiceCard: { width: 500, quality: 75, format: "webp" as const, fit: "max" as const },
-  /** Çalışma alanı detay */
-  practiceHero: { width: 800, quality: 80, format: "webp" as const, fit: "max" as const },
+  practiceCard: { width: 700, quality: 88, format: "webp" as const, fit: "max" as const },
+  /** Çalışma alanı detay (retina için 2x genişlik) */
+  practiceHero: { width: 1920, quality: 92, format: "webp" as const, fit: "max" as const },
   /** Portable Text içi görsel */
-  contentInline: { width: 900, quality: 80, format: "webp" as const, fit: "max" as const },
+  contentInline: { width: 1200, quality: 90, format: "webp" as const, fit: "max" as const },
 } as const;

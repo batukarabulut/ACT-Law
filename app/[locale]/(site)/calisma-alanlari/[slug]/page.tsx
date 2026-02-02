@@ -67,10 +67,36 @@ export default async function PracticeAreaDetailPage({ params }: Props) {
     { title: t("step4"), desc: t("step4Desc") },
   ];
 
+  const hasHeroImage = !!(area as { image?: SanityImageSource }).image;
+
   return (
     <>
-      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative -mt-20 min-h-[75vh] flex flex-col justify-end pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden">
+        {hasHeroImage ? (
+          <>
+            <div className="absolute inset-0 z-0">
+              <SanityImage
+                image={(area as { image?: SanityImageSource }).image}
+                alt=""
+                preset="practiceHero"
+                fill
+                className="object-cover object-center"
+                sizes="100vw"
+              />
+            </div>
+            <div
+              className="absolute inset-0 z-10 bg-gradient-to-t from-black/95 via-black/60 to-black/30"
+              aria-hidden="true"
+            />
+          </>
+        ) : (
+          <div
+            className="absolute inset-0 z-0 bg-gradient-to-b from-[#1e1e1e] to-[#141414]"
+            aria-hidden="true"
+          />
+        )}
+
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <Link href="/calisma-alanlari" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#10b981] mb-8 transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -92,18 +118,6 @@ export default async function PracticeAreaDetailPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
             <div className="lg:col-span-2">
-              {(area as { image?: SanityImageSource }).image ? (
-                <div className="aspect-[21/9] max-w-2xl mb-12 rounded-lg overflow-hidden bg-gray-100 relative">
-                  <SanityImage
-                    image={(area as { image?: SanityImageSource }).image}
-                    alt={title}
-                    preset="practiceHero"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 66vw"
-                  />
-                </div>
-              ) : null}
               <p className="text-gray-600 leading-relaxed text-lg mb-12">{description}</p>
 
               <h2 className="text-2xl font-serif text-[#111] mb-8">{t("ourServices")}</h2>
