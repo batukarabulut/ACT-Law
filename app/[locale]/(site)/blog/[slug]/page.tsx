@@ -59,10 +59,37 @@ export default async function BlogPostPage({ params }: Props) {
   const otherPosts = blogPosts.filter((p) => p.slug !== slug).slice(0, 3);
   const t = await getTranslations("blogPost");
 
+  const hasHeroImage = !!(post as { mainImage?: SanityImageSource }).mainImage;
+
   return (
     <>
-      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative -mt-20 min-h-[75vh] flex flex-col justify-end pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden">
+        {/* Arka plan: görsel varsa görsel + gradient, yoksa düz koyu gradient */}
+        {hasHeroImage ? (
+          <>
+            <div className="absolute inset-0 z-0">
+              <SanityImage
+                image={(post as { mainImage?: SanityImageSource }).mainImage}
+                alt=""
+                preset="blogHero"
+                fill
+                className="object-cover object-center"
+                sizes="100vw"
+              />
+            </div>
+            <div
+              className="absolute inset-0 z-10 bg-gradient-to-t from-black/95 via-black/60 to-black/30"
+              aria-hidden="true"
+            />
+          </>
+        ) : (
+          <div
+            className="absolute inset-0 z-0 bg-gradient-to-b from-[#1e1e1e] to-[#141414]"
+            aria-hidden="true"
+          />
+        )}
+
+        <div className="relative z-20 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#10b981] mb-8 transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -76,26 +103,9 @@ export default async function BlogPostPage({ params }: Props) {
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white leading-tight tracking-tight">
             {post.title}
           </h1>
-          <p className="mt-8 text-lg text-gray-400">{post.excerpt}</p>
+          <p className="mt-8 text-lg text-gray-400 max-w-2xl">{post.excerpt}</p>
         </div>
       </section>
-
-      {(post as { mainImage?: SanityImageSource }).mainImage && (
-        <section className="bg-[#1a1a1a]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="aspect-[21/9] relative overflow-hidden -mb-px">
-              <SanityImage
-                image={(post as { mainImage?: SanityImageSource }).mainImage}
-                alt={post.title}
-                preset="blogHero"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 896px"
-              />
-            </div>
-          </div>
-        </section>
-      )}
 
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

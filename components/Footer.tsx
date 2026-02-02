@@ -28,6 +28,7 @@ export default async function Footer() {
     { href: "/kullanim-kosullari", key: "terms" },
     { href: "/cerez-politikasi", key: "cookie" },
     { href: "/aydinlatma-metni", key: "aydinlatma" },
+    { href: "/yasal-uyari", key: "disclaimerPage" },
   ];
 
   return (
@@ -121,15 +122,18 @@ export default async function Footer() {
       </div>
 
       <div className="border-t border-gray-800/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
-            <p className="text-gray-500 text-xs">
-              © {new Date().getFullYear()} {siteConfig.name}. {t("allRights")}
-            </p>
-            <p className="text-gray-600 text-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-row flex-wrap justify-between items-center gap-3">
+          <p className="text-gray-500 text-xs">
+            © {new Date().getFullYear()} {siteConfig.name}. {t("allRights")}
+          </p>
+          <p className="text-gray-500 text-[11px]">
+            <Link
+              href="/yasal-uyari"
+              className="text-gray-400 hover:text-[#10b981] transition-colors underline underline-offset-2"
+            >
               {t("disclaimer")}
-            </p>
-          </div>
+            </Link>
+          </p>
         </div>
       </div>
     </footer>

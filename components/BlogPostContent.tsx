@@ -133,16 +133,22 @@ const portableTextComponents: PortableTextComponents = {
       const alt = (value?.caption as string) || "";
       if (!url) return null;
       return (
-        <span className="my-6 block overflow-hidden rounded-lg">
-          <Image
-            src={url}
-            alt={alt}
-            width={900}
-            height={500}
-            className="w-full h-auto object-cover"
-            sizes="(max-width: 900px) 100vw, 900px"
-          />
-        </span>
+        <figure className="my-8 max-w-2xl mx-auto">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-gray-100 shadow-sm">
+            <Image
+              src={url}
+              alt={alt}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 672px) 100vw, 672px"
+            />
+          </div>
+          {alt && (
+            <figcaption className="mt-2 text-center text-sm text-gray-500">
+              {alt}
+            </figcaption>
+          )}
+        </figure>
       );
     },
   },
@@ -211,7 +217,7 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
     }
   }, [content, isPortableText]);
 
-  // Track scroll progress
+  // Track scroll progress (viewport ortası referans: 0% = ortası içeriğin başında, 100% = ortası içeriğin sonunda)
   useEffect(() => {
     const handleScroll = () => {
       if (!contentRef.current) return;
@@ -219,16 +225,17 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
       const element = contentRef.current;
       const rect = element.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      const elementTop = rect.top;
+      const viewportCenterY = window.scrollY + windowHeight / 2;
+      const contentTopDoc = rect.top + window.scrollY;
       const elementHeight = rect.height;
 
-      const scrolledPast = Math.max(0, windowHeight - elementTop);
-      const totalScrollable = elementHeight + windowHeight;
-      const currentProgress = Math.min(100, Math.max(0, (scrolledPast / totalScrollable) * 100));
+      // İlerleme: viewport ortası içerikte nerede? 0% başta, 100% sonda
+      const rawProgress = (viewportCenterY - contentTopDoc) / elementHeight;
+      const currentProgress = Math.min(100, Math.max(0, rawProgress * 100));
 
       setProgress(Math.round(currentProgress));
 
-      // Find active heading
+      // Find active heading (viewport ortasına en yakın başlık)
       const headingElements = element.querySelectorAll("[data-heading-id]");
       let currentActiveHeading = "";
 
@@ -253,8 +260,11 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
   const scrollToHeading = (id: string) => {
     const element = document.querySelector(`[data-heading-id="${id}"]`);
     if (element) {
-      const offset = 100;
-      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      const rect = element.getBoundingClientRect();
+      const absoluteTop = rect.top + window.scrollY;
+      const elementCenterOffset = (element as HTMLElement).offsetHeight / 2;
+      const viewportCenter = window.innerHeight / 2;
+      const top = absoluteTop - viewportCenter + elementCenterOffset;
       window.scrollTo({ top, behavior: "smooth" });
     }
   };
@@ -371,8 +381,8 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
 
   return (
     <div className="relative">
-      {/* Table of Contents - Left Sidebar */}
-      {headings.length > 0 && progress < 100 && (
+      {/* Table of Contents - Left Sidebar (blog içeriği görünmeye başladıktan sonra göster) */}
+      {headings.length > 0 && progress > 0 && progress < 100 && (
         <div className="hidden xl:block fixed left-8 2xl:left-[calc((100vw-1280px)/2-220px)] top-1/2 -translate-y-1/2 w-56 transition-opacity duration-300">
           <nav className="space-y-1">
             {headings.map((heading) => (
@@ -408,29 +418,31 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
         </div>
       )}
 
-      {/* Share Buttons - Right Sidebar */}
-      <div className="hidden xl:block fixed right-8 2xl:right-[calc((100vw-1280px)/2-80px)] top-1/2 -translate-y-1/2">
-        <div className="flex flex-col items-center gap-1">
-          <span className="text-xs font-medium tracking-wider uppercase text-gray-400 mb-2">
-            {t("share")}
-          </span>
-          {shareLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-11 h-11 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:text-[#10b981] hover:border-[#10b981] transition-colors"
-              title={link.name}
-            >
-              {link.icon}
-            </a>
-          ))}
+      {/* Share Buttons - Right Sidebar (yazı başladıktan sonra göster) */}
+      {progress > 0 && progress < 100 && (
+        <div className="hidden xl:block fixed right-8 2xl:right-[calc((100vw-1280px)/2-80px)] top-1/2 -translate-y-1/2 transition-opacity duration-300">
+          <div className="flex flex-col items-center gap-1">
+            <span className="text-xs font-medium tracking-wider uppercase text-gray-400 mb-2">
+              {t("share")}
+            </span>
+            {shareLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:text-[#10b981] hover:border-[#10b981] transition-colors"
+                title={link.name}
+              >
+                {link.icon}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Mobile Share & TOC */}
-      {headings.length > 0 && progress < 100 && (
+      {/* Mobile Share & TOC (blog içeriği görünmeye başladıktan sonra göster) */}
+      {headings.length > 0 && progress > 0 && progress < 100 && (
         <div className="xl:hidden mb-8 p-4 bg-gray-50 rounded-lg transition-opacity duration-300">
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-medium text-gray-700">{t("toc")}</span>

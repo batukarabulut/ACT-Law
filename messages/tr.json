@@ -28,6 +28,7 @@
     "terms": "Kullanım Koşulları",
     "cookie": "Çerez Politikası",
     "aydinlatma": "Aydınlatma Metni",
+    "disclaimerPage": "Yasal Uyarı",
     "ticaretHukuku": "Ticaret Hukuku",
     "sirketlerHukuku": "Şirketler Hukuku",
     "aileHukuku": "Aile Hukuku",
@@ -90,8 +91,8 @@
     "formTitle": "İletişim Formu",
     "formDesc": "En kısa sürede dönüş yapacağız.",
     "location": "Konum",
-    "locationTitle": "Eskişehir Adalet Sarayı",
-    "locationSub": "Büromuzun bulunduğu adliye binası",
+    "locationTitle": "ACT | Hukuk & Danışmanlık",
+    "locationSub": "Büromuzun bulunduğu adres",
     "openInMaps": "Konumu Google Maps'te aç"
   },
   "contactForm": {
@@ -123,10 +124,10 @@
     "title": "Blog",
     "legalPosts": "Hukuki Yazılar",
     "sub": "Güncel bilgiler ve faydalı içerikler.",
-    "backTo": "Blog"
+    "backTo": "Yayınlar"
   },
   "blogPost": {
-    "backTo": "Blog",
+    "backTo": "Yayınlar",
     "otherPosts": "Diğer Yazılar",
     "attorney": "Avukat",
     "share": "Paylaş",
@@ -253,6 +254,7 @@
     "aydinlatmaSub": "İletişim Formumuz Üzerinden Toplanan Kişisel Verilerinize İlişkin",
     "cerez": "Çerez Politikası",
     "kullanim": "Kullanım Koşulları",
+    "disclaimerPage": "Yasal Uyarı",
     "enOnlyNotice": "Bu sayfa şu an Türkçe olarak sunulmaktadır. İngilizce metin için bizimle iletişime geçebilirsiniz."
   },
   "notFound": {

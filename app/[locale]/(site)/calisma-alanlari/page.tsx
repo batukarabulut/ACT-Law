@@ -10,9 +10,9 @@ type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "practiceAreas" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
   return {
-    title: t("label"),
+    title: tNav("practiceAreas"),
     description: "Ticaret hukuku, şirketler hukuku, aile hukuku, miras hukuku, iş hukuku ve daha fazlası.",
   };
 }
@@ -28,13 +28,14 @@ export default async function PracticeAreasPage({ params }: Props) {
   ]);
 
   const t = await getTranslations("practiceAreas");
+  const tNav = await getTranslations("nav");
 
   return (
     <>
       <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-[11px] tracking-[0.2em] uppercase text-[#10b981] mb-3">
-            {t("label")}
+            {tNav("practiceAreas")}
           </p>
           <div className="w-12 h-px bg-[#10b981]/60 mb-6" aria-hidden="true" />
           <h1 className="text-4xl md:text-5xl font-serif text-white tracking-tight">

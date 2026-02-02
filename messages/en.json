@@ -28,6 +28,7 @@
     "terms": "Terms of Use",
     "cookie": "Cookie Policy",
     "aydinlatma": "Privacy Notice",
+    "disclaimerPage": "Legal Disclaimer",
     "ticaretHukuku": "Commercial Law",
     "sirketlerHukuku": "Corporate Law",
     "aileHukuku": "Family Law",
@@ -90,8 +91,8 @@
     "formTitle": "Contact Form",
     "formDesc": "We will get back to you as soon as possible.",
     "location": "Location",
-    "locationTitle": "Eskişehir Courthouse",
-    "locationSub": "The courthouse where our office is located",
+    "locationTitle": "ACT | Law & Consulting",
+    "locationSub": "Our office address",
     "openInMaps": "Open in Google Maps"
   },
   "contactForm": {
@@ -123,10 +124,10 @@
     "title": "Blog",
     "legalPosts": "Legal Articles",
     "sub": "Current information and useful content.",
-    "backTo": "Blog"
+    "backTo": "Publications"
   },
   "blogPost": {
-    "backTo": "Blog",
+    "backTo": "Publications",
     "otherPosts": "Other Articles",
     "attorney": "Attorney",
     "share": "Share",
@@ -253,6 +254,7 @@
     "aydinlatmaSub": "Regarding Personal Data Collected Through Our Contact Form",
     "cerez": "Cookie Policy",
     "kullanim": "Terms of Use",
+    "disclaimerPage": "Legal Disclaimer",
     "enOnlyNotice": "This page is currently available in Turkish. For an English version, please contact us."
   },
   "notFound": {

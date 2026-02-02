@@ -124,10 +124,11 @@ export const practiceAreasIntroQuery = groq`
 export const legalContentQuery = groq`
   *[_type == "legalContent"][0] {
     "termsOfUse": coalesce(termsOfUse[$locale], termsOfUse.tr, termsOfUse.en, termsOfUse),
-    // Uyarı metinlerinde dil fallback'i istemiyoruz; her dil kendi uyarısını gösterir
     "termsOfUseWarning": termsOfUseWarning[$locale],
     "privacyNotice": coalesce(privacyNotice[$locale], privacyNotice.tr, privacyNotice.en, privacyNotice),
     "privacyNoticeWarning": privacyNoticeWarning[$locale],
-    "cookiePolicy": coalesce(cookiePolicy[$locale], cookiePolicy.tr, cookiePolicy.en, cookiePolicy)
+    "cookiePolicy": coalesce(cookiePolicy[$locale], cookiePolicy.tr, cookiePolicy.en, cookiePolicy),
+    "siteDisclaimer": coalesce(siteDisclaimer[$locale], siteDisclaimer.tr, siteDisclaimer.en, siteDisclaimer),
+    "customWarning": coalesce(customWarning[$locale], customWarning.tr, customWarning.en, customWarning)
   }
 `;

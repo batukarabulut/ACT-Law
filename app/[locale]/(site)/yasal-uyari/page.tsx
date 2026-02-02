@@ -1,0 +1,54 @@
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
+import { getLegalContent } from "@/sanity/lib/fetch";
+import LegalContent from "@/components/LegalContent";
+
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "legal" });
+  return {
+    title: t("disclaimerPage"),
+    description:
+      locale === "tr"
+        ? "Bu site bilgilendirme amaçlıdır. Yasal uyarı metni."
+        : "This site is for informational purposes. Legal disclaimer.",
+  };
+}
+
+export default async function YasalUyariPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations("legal");
+  const legalContent = await getLegalContent(locale);
+
+  return (
+    <>
+      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-[11px] tracking-wider uppercase text-[#10b981] mb-3">
+            {t("legal")}
+          </p>
+          <h1 className="text-4xl md:text-5xl font-serif text-white">
+            {t("disclaimerPage")}
+          </h1>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          {legalContent.siteDisclaimer &&
+          Array.isArray(legalContent.siteDisclaimer) &&
+          legalContent.siteDisclaimer.length > 0 ? (
+            <LegalContent content={legalContent.siteDisclaimer} />
+          ) : (
+            <p className="text-gray-600">{t("enOnlyNotice")}</p>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}

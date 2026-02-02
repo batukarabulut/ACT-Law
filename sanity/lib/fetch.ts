@@ -38,6 +38,7 @@ export type LegalContent = {
   privacyNotice?: any[];
   privacyNoticeWarning?: string | null;
   cookiePolicy?: any[];
+  siteDisclaimer?: any[];
 };
 
 // Site Ayarları

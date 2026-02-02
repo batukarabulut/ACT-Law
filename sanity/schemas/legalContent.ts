@@ -131,6 +131,46 @@ export const legalContent = defineType({
         },
       ],
     }),
+    defineField({
+      name: "siteDisclaimer",
+      title: "Yasal Uyarı Sayfası / Site Disclaimer Page",
+      type: "object",
+      description: "Footer’daki «Bu site bilgilendirme amaçlıdır» linkinin açıldığı sayfada gösterilecek uyarı metni (zengin metin, TR/EN).",
+      fields: [
+        {
+          name: "tr",
+          title: "Türkçe",
+          type: "array",
+          of: [{ type: "block" }],
+        },
+        {
+          name: "en",
+          title: "English",
+          type: "array",
+          of: [{ type: "block" }],
+        },
+      ],
+    }),
+    defineField({
+      name: "customWarning",
+      title: "Yeni Uyarı Yazısı / Custom Warning",
+      type: "object",
+      description: "İstediğiniz ek uyarı metnini buraya girin. Zengin metin (TR/EN). İhtiyaca göre iletişim formu, footer veya başka bir yerde gösterilebilir.",
+      fields: [
+        {
+          name: "tr",
+          title: "Türkçe",
+          type: "array",
+          of: [{ type: "block" }],
+        },
+        {
+          name: "en",
+          title: "English",
+          type: "array",
+          of: [{ type: "block" }],
+        },
+      ],
+    }),
   ],
   preview: {
     select: {

@@ -41,32 +41,50 @@ export default async function Home({ params }: Props) {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {practiceAreas.slice(0, 8).map((area, index) => {
-              // Artık Sanity'den locale'e göre çekildiği için translation'a gerek yok
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {practiceAreas.slice(0, 4).map((area, index) => {
               const title = area.title;
               const shortDescription = area.shortDescription;
+              const areaImage = (area as { image?: SanityImageSource }).image;
 
               return (
                 <Link
                   key={area.slug}
                   href={`/calisma-alanlari/${area.slug}`}
-                  className="group p-6 bg-[#fafafa] border border-gray-200/90 rounded-lg hover:border-[#10b981]/30 hover:shadow-sm hover:bg-[#fcfcfc] transition-all duration-300"
+                  className="group bg-[#fafafa] border border-gray-200/90 rounded-lg overflow-hidden hover:border-[#10b981]/30 hover:shadow-sm hover:bg-[#fcfcfc] transition-all duration-300"
                 >
-                  <span className="text-[#10b981] text-sm font-medium">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-3 text-lg font-serif text-[#111] group-hover:text-[#10b981] transition-colors">
-                    {title}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-600 line-clamp-2">
-                    {shortDescription}
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-sm text-[#10b981] opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1">
-                    <span>{t("detail")}</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                  <div className="aspect-[16/10] bg-gray-200 relative overflow-hidden">
+                    {areaImage ? (
+                      <SanityImage
+                        image={areaImage}
+                        alt={title}
+                        preset="practiceCard"
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-[#e5e5e5]">
+                        <span className="text-4xl font-serif text-gray-400">{String(index + 1).padStart(2, "0")}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <span className="text-[#10b981] text-sm font-medium">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-2 text-lg font-serif text-[#111] group-hover:text-[#10b981] transition-colors line-clamp-2">
+                      {title}
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-600 line-clamp-2">
+                      {shortDescription}
+                    </p>
+                    <div className="mt-4 flex items-center gap-2 text-sm text-[#10b981] opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1">
+                      <span>{t("detail")}</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
                   </div>
                 </Link>
               );
