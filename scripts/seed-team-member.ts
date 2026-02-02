@@ -1,11 +1,13 @@
 /**
  * Mevcut avukat (Ahmet Can Tonus) bilgisini Sanity'de oluşturur.
- * Böylece Ekibimiz sayfasındaki veriler Studio'dan düzenlenebilir.
+ * Böylece Ekibimiz sayfası ve blog yazısı "Yazar" seçeneği dolu olur.
  *
- * Çalıştırmak için:
- *   SANITY_WRITE_TOKEN=xxx npx tsx scripts/seed-team-member.ts
+ * Çalıştırmak için (token: https://www.sanity.io/manage → Project → API → Tokens → Add API token, Editor):
  *
- * Token: https://www.sanity.io/manage → Project → API → Tokens → Add API token (Editor)
+ *   Windows (PowerShell):  $env:SANITY_WRITE_TOKEN="sk..."; npm run seed:team
+ *   Mac/Linux:            SANITY_WRITE_TOKEN=sk... npm run seed:team
+ *
+ * Alternatif: Sanity Studio → Ekibimiz / Team → "Create new" ile elle ekleyebilirsiniz.
  */
 import { createClient } from "next-sanity";
 
@@ -41,7 +43,8 @@ const defaultTeamMember = {
 async function seedTeamMember() {
   if (!process.env.SANITY_WRITE_TOKEN) {
     console.error("❌ SANITY_WRITE_TOKEN ortam değişkeni gerekli.");
-    console.log("   https://www.sanity.io/manage → Project → API → Tokens");
+    console.log("   Token: https://www.sanity.io/manage → Projeniz → API → Tokens → Add API token (Editor)");
+    console.log("   Sonra: $env:SANITY_WRITE_TOKEN=\"sk...\"; npm run seed:team  (PowerShell)");
     process.exit(1);
   }
 

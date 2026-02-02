@@ -79,7 +79,10 @@ export const blogPostBySlugQuery = groq`
     publishedAt,
     "category": coalesce(category[$locale], category.tr, category.en, category),
     readTime,
-    mainImage
+    mainImage,
+    authorName,
+    authorTitle,
+    authorImage
   }
 `;
 

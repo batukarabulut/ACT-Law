@@ -131,6 +131,25 @@ export const blogPost = defineType({
       type: "datetime",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "authorName",
+      title: "Yazar adı",
+      type: "string",
+      description: "Yazıyı yazan kişinin adı. Boş bırakılırsa site sahibi gösterilir.",
+    }),
+    defineField({
+      name: "authorTitle",
+      title: "Yazar ünvanı",
+      type: "string",
+      description: "Örn: Avukat, Av. ...",
+    }),
+    defineField({
+      name: "authorImage",
+      title: "Yazar fotoğrafı",
+      type: "image",
+      description: "İsteğe bağlı.",
+      options: { hotspot: true },
+    }),
   ],
   orderings: [
     {

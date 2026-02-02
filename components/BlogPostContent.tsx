@@ -441,21 +441,12 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
         </div>
       )}
 
-      {/* Mobile Share & TOC (blog içeriği görünmeye başladıktan sonra göster) */}
-      {headings.length > 0 && progress > 0 && progress < 100 && (
-        <div className="xl:hidden mb-8 p-4 bg-gray-50 rounded-lg transition-opacity duration-300">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-gray-700">{t("toc")}</span>
-            <span className="text-sm text-[#10b981] font-medium">%{progress}</span>
-          </div>
-          <div className="h-1 bg-gray-200 rounded-full overflow-hidden mb-4">
-            <div
-              className="h-full bg-[#10b981] transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {headings.slice(0, 4).map((heading) => (
+      {/* Mobil: en üstte sadece içindekiler (yüzde yok) */}
+      {headings.length > 0 && (
+        <div className="xl:hidden mb-8 p-4 bg-gray-50 rounded-lg">
+          <span className="text-sm font-medium text-gray-700 block mb-3">{t("toc")}</span>
+          <nav className="flex flex-wrap gap-2">
+            {headings.map((heading) => (
               <button
                 key={heading.id}
                 onClick={() => scrollToHeading(heading.id)}
@@ -465,25 +456,10 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
                     : "bg-white border border-gray-200 text-gray-600 hover:border-[#10b981]"
                 }`}
               >
-                {heading.text.length > 25 ? heading.text.slice(0, 25) + "..." : heading.text}
+                {heading.text.length > 30 ? heading.text.slice(0, 30) + "..." : heading.text}
               </button>
             ))}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">{t("share")}:</span>
-            {shareLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-500 hover:text-[#10b981] hover:border-[#10b981] transition-colors"
-                title={link.name}
-              >
-                <span className="w-4 h-4">{link.icon}</span>
-              </a>
-            ))}
-          </div>
+          </nav>
         </div>
       )}
 
@@ -491,6 +467,25 @@ export default function BlogPostContent({ content, title, slug, shareUrl }: Blog
       <article ref={contentRef} className="prose prose-lg max-w-none">
         {renderContent()}
       </article>
+
+      {/* Mobil: en altta sadece paylaşım seçenekleri */}
+      <div className="xl:hidden mt-10 pt-8 border-t border-gray-100">
+        <span className="text-xs font-medium tracking-wider uppercase text-gray-400 block mb-3">{t("share")}</span>
+        <div className="flex flex-wrap gap-3">
+          {shareLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:text-[#10b981] hover:border-[#10b981] transition-colors"
+              title={link.name}
+            >
+              {link.icon}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

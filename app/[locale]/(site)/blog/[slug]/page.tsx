@@ -123,17 +123,44 @@ export default async function BlogPostPage({ params }: Props) {
             shareUrl={shareUrl}
           />
 
-          <div className="mt-12 pt-8 border-t border-gray-100 flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#1a1a1a] rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </div>
-            <div>
-              <p className="font-medium text-[#111]">{siteConfig.name}</p>
-              <p className="text-sm text-gray-400">{t("attorney")}</p>
-            </div>
-          </div>
+          {/* Yazar bilgisi: blog yazısındaki isim, ünvan, fotoğraf; yoksa site sahibi */}
+          {(() => {
+            const postWithAuthor = post as {
+              authorName?: string;
+              authorTitle?: string;
+              authorImage?: SanityImageSource;
+            };
+            const displayName = postWithAuthor.authorName ?? siteConfig.name;
+            const displayTitle = postWithAuthor.authorTitle ?? t("attorney");
+            const authorImage = postWithAuthor.authorImage;
+            return (
+              <div className="mt-12 pt-8 border-t border-gray-100 flex items-center gap-4">
+                <div className="w-14 h-14 rounded-full overflow-hidden bg-[#1a1a1a] flex-shrink-0 relative">
+                  {authorImage ? (
+                    <SanityImage
+                      image={authorImage}
+                      alt={displayName}
+                      preset="about"
+                      fill
+                      className="object-cover object-top"
+                      sizes="56px"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <svg className="w-7 h-7 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <p className="text-xs font-medium tracking-wider uppercase text-[#10b981] mb-0.5">{t("authorLabel")}</p>
+                  <p className="font-medium text-[#111]">{displayName}</p>
+                  <p className="text-sm text-gray-400">{displayTitle}</p>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
@@ -155,6 +182,9 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
                 <p className="text-xs text-[#10b981] mb-1">{p.category}</p>
                 <h3 className="font-serif text-[#111] group-hover:text-gray-600 line-clamp-2">{p.title}</h3>
+                {p.excerpt && (
+                  <p className="mt-2 text-sm text-gray-500 line-clamp-2">{p.excerpt}</p>
+                )}
               </Link>
             ))}
           </div>
