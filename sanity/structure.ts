@@ -1,17 +1,27 @@
 import { StructureBuilder } from "sanity/structure";
 
+/** İlk ekip üyesi (ana avukat) şablonu – "Yeni oluştur"da bu seçenek çıkar, form önceden dolu gelir. */
+const ANA_AVUKAT_TEMPLATE_ID = "teamMember-ana-avukat";
+
 /**
- * Özel menü yapısı: Ekibimiz ve diğer içerik türleri görünür şekilde listelenir.
- * Mevcut avukat bilgilerini görmek için "Ekibimiz / Team"e tıklayın;
- * liste boşsa "Create new" ile ekleyin veya seed script çalıştırın.
+ * Özel menü: Ekibimiz listesi. Liste boşsa "+" veya menüden "Ana avukat (ilk kayıt)" ile yeni belge oluşturun; form önceden dolu gelir.
  */
 export const structure = (S: StructureBuilder) =>
   S.list()
     .id("content")
     .title("İçerik")
     .items([
-      // Ekibimiz en üstte – avukat ve ekip üyeleri
-      S.documentTypeListItem("teamMember").title("Ekibimiz / Team"),
+      S.listItem()
+        .title("Ekibimiz / Team")
+        .child(
+          S.documentTypeList("teamMember")
+            .title("Ekibimiz")
+            .initialValueTemplates([
+              S.initialValueTemplateItem(ANA_AVUKAT_TEMPLATE_ID),
+              S.initialValueTemplateItem("teamMember"),
+            ])
+        )
+        .id("team-root"),
       S.divider(),
       // Diğer türler
       S.documentTypeListItem("siteConfig").title("Site Ayarları"),

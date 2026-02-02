@@ -23,5 +23,26 @@ export default defineConfig({
   
   schema: {
     types: schemaTypes,
+    templates: (prev) => [
+      ...prev,
+      {
+        id: "teamMember-ana-avukat",
+        title: "Ana avukat (ilk kayıt)",
+        schemaType: "teamMember",
+        value: {
+          name: {
+            tr: "Av. Ahmet Can Tonus",
+            en: "Ahmet Can Tonus, Attorney",
+          },
+          title: { tr: "Avukat", en: "Attorney" },
+          shortDescription: {
+            tr: "10+ yıllık deneyimiyle ticaret hukuku, şirketler hukuku ve sözleşmeler hukuku alanlarında uzman. Müvekkillerine güvenilir ve sonuç odaklı hukuki danışmanlık sunmaktadır.",
+            en: "Expert in commercial law, corporate law and contract law with over 10 years of experience. Provides reliable and result-oriented legal consultancy to clients.",
+          },
+          order: 0,
+          linkToAbout: true,
+        },
+      },
+    ],
   },
 });

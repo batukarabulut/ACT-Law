@@ -121,9 +121,13 @@ export const blogPost = defineType({
     }),
     defineField({
       name: "readTime",
-      title: "Okuma Süresi",
-      type: "string",
-      description: "Örn: 5 dk",
+      title: "Okuma Süresi / Read Time",
+      type: "object",
+      description: "TR: örn. 5 dk — EN: e.g. 5 min",
+      fields: [
+        { name: "tr", title: "Türkçe", type: "string", placeholder: "5 dk" },
+        { name: "en", title: "English", type: "string", placeholder: "5 min" },
+      ],
     }),
     defineField({
       name: "publishedAt",

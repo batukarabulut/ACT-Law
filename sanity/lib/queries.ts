@@ -63,7 +63,7 @@ export const blogPostsQuery = groq`
     "content": coalesce(content[$locale], content.tr, content.en, content),
     publishedAt,
     "category": coalesce(category[$locale], category.tr, category.en, category),
-    readTime,
+    "readTime": coalesce(readTime[$locale], readTime.tr, readTime.en, readTime),
     mainImage
   }
 `;
@@ -78,7 +78,7 @@ export const blogPostBySlugQuery = groq`
     "content": coalesce(content[$locale], content.tr, content.en, content),
     publishedAt,
     "category": coalesce(category[$locale], category.tr, category.en, category),
-    readTime,
+    "readTime": coalesce(readTime[$locale], readTime.tr, readTime.en, readTime),
     mainImage,
     authorName,
     authorTitle,
