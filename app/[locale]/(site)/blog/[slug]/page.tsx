@@ -36,7 +36,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const metaDescription =
     typeof post.excerpt === "string" ? post.excerpt : undefined;
 
-  return { title: metaTitle, description: metaDescription };
+  return {
+    title: metaTitle,
+    description: metaDescription,
+    openGraph: {
+      title: metaTitle,
+      description: metaDescription ?? undefined,
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: Props) {

@@ -2,7 +2,7 @@ export const siteConfig = {
   logo: undefined as { _type: string; asset?: { _ref: string } } | undefined,
   name: "Av. Ahmet Can Tonus",
   title: "ACT | Law & Consulting",
-  description: "CT & Partners Hukuk Bürosu resmi web sitesidir.",
+  description: "ACT | Law & Consulting - Av. Ahmet Can Tonus Hukuk Bürosu resmi web sitesidir.",
   heroDescription: undefined as string | undefined,
   phone: "0541 332 35 95",
   email: "info@ctpartners.av.tr",
