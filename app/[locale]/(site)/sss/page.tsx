@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { getFaqItems, getSiteConfig } from "@/sanity/lib/fetch";
 import FAQAccordion from "@/components/FAQAccordion";
+import PageHero from "@/components/PageHero";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 
@@ -30,14 +31,12 @@ export default async function FAQPage({ params }: Props) {
 
   return (
     <>
-      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-[11px] tracking-[0.2em] uppercase text-[#10b981] mb-3">{tNav("faq")}</p>
-          <div className="w-12 h-px bg-[#10b981]/60 mb-6" aria-hidden="true" />
-          <h1 className="text-4xl md:text-5xl font-serif text-white tracking-tight">{t("title")}</h1>
-          <p className="mt-4 text-gray-400">{t("sub")}</p>
-        </div>
-      </section>
+      <PageHero
+        navLabel={tNav("faq")}
+        title={t("title")}
+        subtitle={t("sub")}
+        heroImage={siteConfig.heroFaq ?? undefined}
+      />
 
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

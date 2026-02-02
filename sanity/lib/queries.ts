@@ -23,7 +23,13 @@ export const siteConfigQuery = groq`
     phone,
     email,
     address,
-    "workingHours": coalesce(workingHours[$locale], workingHours.tr, workingHours.en, workingHours)
+    "workingHours": coalesce(workingHours[$locale], workingHours.tr, workingHours.en, workingHours),
+    heroAbout,
+    heroTeam,
+    heroPracticeAreas,
+    heroBlog,
+    heroFaq,
+    heroContact
   }
 `;
 

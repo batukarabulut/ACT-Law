@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
-import { getTeamMembers } from "@/sanity/lib/fetch";
+import { getTeamMembers, getSiteConfig } from "@/sanity/lib/fetch";
 import SanityImage from "@/components/SanityImage";
+import PageHero from "@/components/PageHero";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 
@@ -21,26 +22,21 @@ export default async function TeamPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const teamMembers = await getTeamMembers(locale);
+  const [teamMembers, siteConfig] = await Promise.all([
+    getTeamMembers(locale),
+    getSiteConfig(locale),
+  ]);
   const t = await getTranslations("team");
   const tNav = await getTranslations("nav");
 
   return (
     <>
-      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-[11px] tracking-[0.2em] uppercase text-[#10b981] mb-3">
-            {tNav("team")}
-          </p>
-          <div className="w-12 h-px bg-[#10b981]/60 mb-6" aria-hidden="true" />
-          <h1 className="text-4xl md:text-5xl font-serif text-white tracking-tight">
-            {tNav("team")}
-          </h1>
-          <p className="mt-6 text-lg text-gray-400 max-w-2xl">
-            {t("sub")}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        navLabel={tNav("team")}
+        title={tNav("team")}
+        subtitle={t("sub")}
+        heroImage={siteConfig.heroTeam ?? undefined}
+      />
 
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -8,6 +8,12 @@ export const siteConfig = {
   email: "info@ctpartners.av.tr",
   address: "Gökmeydan Mh. Nilgün Sk. Uzun Ap. 122/10 Odunpazarı/Eskişehir",
   workingHours: "Pazartesi - Cuma: 09:00 - 18:00",
+  heroAbout: undefined as { _type: string; asset?: { _ref: string } } | undefined,
+  heroTeam: undefined as { _type: string; asset?: { _ref: string } } | undefined,
+  heroPracticeAreas: undefined as { _type: string; asset?: { _ref: string } } | undefined,
+  heroBlog: undefined as { _type: string; asset?: { _ref: string } } | undefined,
+  heroFaq: undefined as { _type: string; asset?: { _ref: string } } | undefined,
+  heroContact: undefined as { _type: string; asset?: { _ref: string } } | undefined,
 };
 
 export const practiceAreasIntro = {

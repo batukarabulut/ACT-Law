@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
-import { getPracticeAreas, getPracticeAreasIntro } from "@/sanity/lib/fetch";
+import { getPracticeAreas, getPracticeAreasIntro, getSiteConfig } from "@/sanity/lib/fetch";
 import SanityImage from "@/components/SanityImage";
+import PageHero from "@/components/PageHero";
 import type { SanityImageSource } from "@/sanity/lib/image";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
@@ -22,9 +23,10 @@ export default async function PracticeAreasPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [practiceAreas, practiceAreasIntro] = await Promise.all([
+  const [practiceAreas, practiceAreasIntro, siteConfig] = await Promise.all([
     getPracticeAreas(locale),
     getPracticeAreasIntro(locale),
+    getSiteConfig(locale),
   ]);
 
   const t = await getTranslations("practiceAreas");
@@ -32,20 +34,12 @@ export default async function PracticeAreasPage({ params }: Props) {
 
   return (
     <>
-      <section className="-mt-20 pt-20 pb-20 lg:pt-28 lg:pb-28 bg-gradient-to-b from-[#1e1e1e] to-[#141414]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-[11px] tracking-[0.2em] uppercase text-[#10b981] mb-3">
-            {tNav("practiceAreas")}
-          </p>
-          <div className="w-12 h-px bg-[#10b981]/60 mb-6" aria-hidden="true" />
-          <h1 className="text-4xl md:text-5xl font-serif text-white tracking-tight">
-            {practiceAreasIntro?.title || t("intro.title")}
-          </h1>
-          <p className="mt-6 text-gray-400 max-w-3xl leading-relaxed">
-            {practiceAreasIntro?.description || t("intro.description")}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        navLabel={tNav("practiceAreas")}
+        title={practiceAreasIntro?.title || t("intro.title")}
+        subtitle={practiceAreasIntro?.description || t("intro.description")}
+        heroImage={siteConfig.heroPracticeAreas ?? undefined}
+      />
 
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

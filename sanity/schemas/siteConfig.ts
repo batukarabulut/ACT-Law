@@ -67,6 +67,48 @@ export const siteConfig = defineType({
         { name: "en", title: "English", type: "string" },
       ],
     }),
+    defineField({
+      name: "heroAbout",
+      title: "Hakkımızda – Hero arka plan",
+      type: "image",
+      description: "Hakkımızda sayfası hero bölümü arka plan görseli. Boş bırakırsanız koyu gradient kullanılır.",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "heroTeam",
+      title: "Ekibimiz – Hero arka plan",
+      type: "image",
+      description: "Ekibimiz sayfası hero arka plan görseli.",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "heroPracticeAreas",
+      title: "Çalışma Alanlarımız – Hero arka plan",
+      type: "image",
+      description: "Çalışma alanları liste sayfası hero arka plan görseli.",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "heroBlog",
+      title: "Yayınlar – Hero arka plan",
+      type: "image",
+      description: "Yayınlar (blog) liste sayfası hero arka plan görseli.",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "heroFaq",
+      title: "S.S.S – Hero arka plan",
+      type: "image",
+      description: "Sıkça Sorulan Sorular sayfası hero arka plan görseli.",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "heroContact",
+      title: "İletişim – Hero arka plan",
+      type: "image",
+      description: "İletişim sayfası hero arka plan görseli.",
+      options: { hotspot: true },
+    }),
   ],
   preview: {
     select: {
